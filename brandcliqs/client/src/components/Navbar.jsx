@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+
 import {
   Menu,
   X,
@@ -6,12 +7,14 @@ import {
   Sun,
   Moon,
 } from 'lucide-react';
+
 import { useEffect, useState } from 'react';
 import Logo from './Logo';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+  const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
 
   const [darkMode, setDarkMode] = useState(() => {
@@ -25,6 +28,11 @@ export default function Navbar() {
     ['Growth Analytics', '/products/growth-analytics'],
     ['Agency Cliq', '/products/agency-cliq'],
     ['Growth Insights', '/products/growth-insights'],
+  ];
+
+  const solutions = [
+    ['Solutions — For', '/solutions'],
+    ['Solutions — Use Cases', '/solutions'],
   ];
 
   const resources = [
@@ -46,22 +54,36 @@ export default function Navbar() {
     }
   }, [darkMode]);
 
+  useEffect(() => {
+    setOpen(false);
+    setProductsOpen(false);
+    setSolutionsOpen(false);
+    setResourcesOpen(false);
+  }, [loc.pathname]);
+
   const toggleTheme = () => {
     setDarkMode((prev) => !prev);
   };
 
-  return (
-    <header className="sticky top-0 z-50 border-b border-[#eee9f2] bg-white/90 backdrop-blur">
-      <div className="container-x h-[74px] flex items-center justify-between">
+  const dropdownClass =
+    'block rounded-lg px-4 py-3 text-sm text-[#6f667b] ' +
+    'hover:bg-[#f8f5fb] hover:text-[#6D28D9] ' +
+    'dark:text-[#d2c7df] dark:hover:bg-[#352346] dark:hover:text-white';
 
-        <Link to="/">
+  const activeLinkClass =
+    'text-[#6D28D9] font-semibold dark:text-[#a78bfa]';
+
+  return (
+    <header className="sticky top-0 z-50 border-b border-[#eee9f2] bg-white/90 backdrop-blur dark:border-[#332344] dark:bg-[#1d1426]/95">
+      <div className="container-x h-[74px] flex items-center justify-between">
+        {/* LOGO */}
+        <Link to="/" aria-label="BrandCliqs Home">
           <Logo />
         </Link>
 
-        {/* DESKTOP NAV */}
-        <nav className="hidden lg:flex items-center gap-8 text-[15px] text-[#6f667b]">
-
-          {/* PRODUCTS */}
+        {/* DESKTOP NAVIGATION */}
+        <nav className="hidden lg:flex items-center gap-8 text-[15px] text-[#6f667b] dark:text-[#d2c7df]">
+          {/* PRODUCTS DROPDOWN */}
           <div
             className="relative"
             onMouseEnter={() => setProductsOpen(true)}
@@ -69,8 +91,9 @@ export default function Navbar() {
           >
             <button
               type="button"
-              className="flex items-center gap-1"
-              onClick={() => setProductsOpen(!productsOpen)}
+              aria-expanded={productsOpen}
+              className="flex items-center gap-1 hover:text-[#6D28D9] dark:hover:text-[#a78bfa]"
+              onClick={() => setProductsOpen((prev) => !prev)}
             >
               Products
               <ChevronDown size={16} />
@@ -78,49 +101,74 @@ export default function Navbar() {
 
             {productsOpen && (
               <div className="absolute left-0 top-full pt-3">
-                <div className="w-60 rounded-xl border border-[#eee9f2] bg-white p-2 shadow-soft">
-
+                <div className="w-60 rounded-xl border border-[#eee9f2] bg-white p-2 shadow-soft dark:border-[#493267] dark:bg-[#241632]">
                   {products.map(([name, path]) => (
                     <Link
                       key={path}
                       to={path}
-                      className="block rounded-lg px-4 py-3 text-sm text-[#6f667b] hover:bg-[#f8f5fb] hover:text-[#171322]"
+                      className={dropdownClass}
                       onClick={() => setProductsOpen(false)}
                     >
                       {name}
                     </Link>
                   ))}
-
                 </div>
               </div>
             )}
           </div>
 
-          {/* SOLUTIONS */}
-          <Link
-            to="/solutions"
-            className={
-              loc.pathname === '/solutions'
-                ? 'text-[#171322] font-semibold'
-                : ''
-            }
+          {/* SOLUTIONS DROPDOWN */}
+          <div
+            className="relative"
+            onMouseEnter={() => setSolutionsOpen(true)}
+            onMouseLeave={() => setSolutionsOpen(false)}
           >
-            Solutions
-          </Link>
+            <button
+              type="button"
+              aria-expanded={solutionsOpen}
+              className={
+                'flex items-center gap-1 hover:text-[#6D28D9] dark:hover:text-[#a78bfa] ' +
+                (loc.pathname.startsWith('/solutions')
+                  ? activeLinkClass
+                  : '')
+              }
+              onClick={() => setSolutionsOpen((prev) => !prev)}
+            >
+              Solutions
+              <ChevronDown size={16} />
+            </button>
+
+            {solutionsOpen && (
+              <div className="absolute left-0 top-full pt-3">
+                <div className="w-64 rounded-xl border border-[#eee9f2] bg-white p-2 shadow-soft dark:border-[#493267] dark:bg-[#241632]">
+                  {solutions.map(([name, path], index) => (
+                    <Link
+                      key={`${name}-${index}`}
+                      to={path}
+                      className={dropdownClass}
+                      onClick={() => setSolutionsOpen(false)}
+                    >
+                      {name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* PRICING */}
           <Link
             to="/pricing"
             className={
               loc.pathname === '/pricing'
-                ? 'text-[#171322] font-semibold'
-                : ''
+                ? activeLinkClass
+                : 'hover:text-[#6D28D9] dark:hover:text-[#a78bfa]'
             }
           >
             Pricing
           </Link>
 
-          {/* RESOURCES */}
+          {/* RESOURCES DROPDOWN */}
           <div
             className="relative"
             onMouseEnter={() => setResourcesOpen(true)}
@@ -128,8 +176,9 @@ export default function Navbar() {
           >
             <button
               type="button"
-              className="flex items-center gap-1"
-              onClick={() => setResourcesOpen(!resourcesOpen)}
+              aria-expanded={resourcesOpen}
+              className="flex items-center gap-1 hover:text-[#6D28D9] dark:hover:text-[#a78bfa]"
+              onClick={() => setResourcesOpen((prev) => !prev)}
             >
               Resources
               <ChevronDown size={16} />
@@ -137,41 +186,42 @@ export default function Navbar() {
 
             {resourcesOpen && (
               <div className="absolute right-0 top-full pt-3">
-                <div className="w-60 rounded-xl border border-[#eee9f2] bg-white p-2 shadow-soft">
-
+                <div className="w-60 rounded-xl border border-[#eee9f2] bg-white p-2 shadow-soft dark:border-[#493267] dark:bg-[#241632]">
                   {resources.map(([name, path]) => (
                     <Link
                       key={path}
                       to={path}
-                      className="block rounded-lg px-4 py-3 text-sm text-[#6f667b] hover:bg-[#f8f5fb] hover:text-[#171322]"
+                      className={dropdownClass}
                       onClick={() => setResourcesOpen(false)}
                     >
                       {name}
                     </Link>
                   ))}
-
                 </div>
               </div>
             )}
           </div>
-
         </nav>
 
-        {/* RIGHT */}
+        {/* DESKTOP RIGHT SIDE */}
         <div className="hidden lg:flex items-center gap-3">
-
           <Link
             to="/login"
-            className="text-sm font-semibold"
+            className="text-sm font-semibold text-[#171322] hover:text-[#6D28D9] transition-colors dark:text-white dark:hover:text-[#c4b5fd]"
           >
             Log in
           </Link>
 
-          {/* THEME */}
+          {/* THEME TOGGLE */}
           <button
             type="button"
             onClick={toggleTheme}
             title={darkMode ? 'Light theme' : 'Dark theme'}
+            aria-label={
+              darkMode
+                ? 'Switch to light theme'
+                : 'Switch to dark theme'
+            }
             className="relative flex h-10 w-[76px] items-center rounded-full border border-[#e6e0ee] bg-[#faf7ff] p-1 shadow-sm dark:border-[#493267] dark:bg-[#1a102b]"
           >
             <span
@@ -187,9 +237,7 @@ export default function Navbar() {
               <Sun
                 size={15}
                 className={
-                  darkMode
-                    ? 'text-[#81758f]'
-                    : 'text-[#FF8A00]'
+                  darkMode ? 'text-[#81758f]' : 'text-[#FF8A00]'
                 }
               />
             </span>
@@ -198,42 +246,38 @@ export default function Navbar() {
               <Moon
                 size={15}
                 className={
-                  darkMode
-                    ? 'text-white'
-                    : 'text-[#81758f]'
+                  darkMode ? 'text-white' : 'text-[#81758f]'
                 }
               />
             </span>
           </button>
 
-          <Link
-            to="/register"
-            className="btn btn-primary text-sm"
-          >
+          <Link to="/register" className="btn btn-primary text-sm">
             Sign up
           </Link>
-
         </div>
 
-        {/* MOBILE */}
+        {/* MOBILE MENU BUTTON */}
         <button
-          className="lg:hidden p-2"
-          onClick={() => setOpen(!open)}
+          type="button"
+          className="lg:hidden p-2 text-[#171322] dark:text-white"
+          onClick={() => setOpen((prev) => !prev)}
           aria-label="Toggle menu"
+          aria-expanded={open}
         >
           {open ? <X /> : <Menu />}
         </button>
-
       </div>
 
+      {/* MOBILE MENU */}
       {open && (
-        <div className="lg:hidden border-t bg-white px-5 py-4 space-y-2">
-
-          {/* PRODUCTS */}
+        <div className="lg:hidden border-t border-[#eee9f2] bg-white px-5 py-4 space-y-2 dark:border-[#332344] dark:bg-[#1d1426]">
+          {/* MOBILE PRODUCTS */}
           <div>
             <button
-              className="flex w-full items-center justify-between rounded-lg px-3 py-3"
-              onClick={() => setProductsOpen(!productsOpen)}
+              type="button"
+              className="flex w-full items-center justify-between rounded-lg px-3 py-3 text-[#171322] dark:text-white"
+              onClick={() => setProductsOpen((prev) => !prev)}
             >
               Products
               <ChevronDown size={16} />
@@ -245,11 +289,8 @@ export default function Navbar() {
                   <Link
                     key={path}
                     to={path}
-                    onClick={() => {
-                      setOpen(false);
-                      setProductsOpen(false);
-                    }}
-                    className="block rounded-lg px-3 py-2 text-sm text-[#756b86]"
+                    className={dropdownClass}
+                    onClick={() => setOpen(false)}
                   >
                     {name}
                   </Link>
@@ -258,27 +299,48 @@ export default function Navbar() {
             )}
           </div>
 
-          <Link
-            to="/solutions"
-            onClick={() => setOpen(false)}
-            className="block rounded-lg px-3 py-3"
-          >
-            Solutions
-          </Link>
+          {/* MOBILE SOLUTIONS */}
+          <div>
+            <button
+              type="button"
+              className="flex w-full items-center justify-between rounded-lg px-3 py-3 text-[#171322] dark:text-white"
+              onClick={() => setSolutionsOpen((prev) => !prev)}
+            >
+              Solutions
+              <ChevronDown size={16} />
+            </button>
 
+            {solutionsOpen && (
+              <div className="pl-3 space-y-1">
+                {solutions.map(([name, path], index) => (
+                  <Link
+                    key={`${name}-${index}`}
+                    to={path}
+                    className={dropdownClass}
+                    onClick={() => setOpen(false)}
+                  >
+                    {name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* MOBILE PRICING */}
           <Link
             to="/pricing"
+            className="block rounded-lg px-3 py-3 text-[#171322] dark:text-white"
             onClick={() => setOpen(false)}
-            className="block rounded-lg px-3 py-3"
           >
             Pricing
           </Link>
 
-          {/* RESOURCES */}
+          {/* MOBILE RESOURCES */}
           <div>
             <button
-              className="flex w-full items-center justify-between rounded-lg px-3 py-3"
-              onClick={() => setResourcesOpen(!resourcesOpen)}
+              type="button"
+              className="flex w-full items-center justify-between rounded-lg px-3 py-3 text-[#171322] dark:text-white"
+              onClick={() => setResourcesOpen((prev) => !prev)}
             >
               Resources
               <ChevronDown size={16} />
@@ -290,11 +352,8 @@ export default function Navbar() {
                   <Link
                     key={path}
                     to={path}
-                    onClick={() => {
-                      setOpen(false);
-                      setResourcesOpen(false);
-                    }}
-                    className="block rounded-lg px-3 py-2 text-sm text-[#756b86]"
+                    className={dropdownClass}
+                    onClick={() => setOpen(false)}
                   >
                     {name}
                   </Link>
@@ -303,10 +362,11 @@ export default function Navbar() {
             )}
           </div>
 
+          {/* MOBILE LOGIN */}
           <Link
             to="/login"
+            className="block rounded-lg px-3 py-3 font-semibold text-[#171322] hover:text-[#6D28D9] dark:text-white dark:hover:text-[#c4b5fd]"
             onClick={() => setOpen(false)}
-            className="block px-3 py-3"
           >
             Log in
           </Link>
@@ -315,7 +375,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={toggleTheme}
-            className="flex w-full items-center justify-between rounded-xl border border-[#e6e0ee] bg-[#faf7ff] px-4 py-3 dark:border-[#493267] dark:bg-[#1a102b]"
+            className="flex w-full items-center justify-between rounded-xl border border-[#e6e0ee] bg-[#faf7ff] px-4 py-3 dark:border-[#493267] dark:bg-[#1a102b] dark:text-white"
           >
             <span className="font-medium">
               {darkMode ? 'Dark theme' : 'Light theme'}
@@ -328,6 +388,7 @@ export default function Navbar() {
             )}
           </button>
 
+          {/* MOBILE SIGN UP */}
           <Link
             to="/register"
             onClick={() => setOpen(false)}
@@ -335,7 +396,6 @@ export default function Navbar() {
           >
             Sign up
           </Link>
-
         </div>
       )}
     </header>

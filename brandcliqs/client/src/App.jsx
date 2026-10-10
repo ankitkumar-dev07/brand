@@ -23,7 +23,6 @@ import ListDetails from './pages/ListDetails';
 import Admin from './pages/Admin';
 import { Privacy, Terms } from './pages/Legal';
 
-
 /* -------------------------------- */
 /* PRODUCT PAGE */
 /* -------------------------------- */
@@ -37,46 +36,31 @@ function ProductPage({
 }) {
   return (
     <main className="container-x py-16">
-
       <div className="max-w-6xl">
+        {/* PRODUCT HEADING — LABEL BOX REMOVED */}
 
-        {/* PRODUCT LABEL */}
-
-        <span className="chip">
-          {title}
-        </span>
-
-
-        {/* PRODUCT HEADING */}
-
-        <h1 className="mt-5 text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#171322] tracking-tight">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#171322] tracking-tight">
           {heading}
         </h1>
-
 
         {/* PRODUCT IMAGE */}
 
         {image && (
           <div className="mt-10 overflow-hidden rounded-[28px] border border-[#eee9f2] bg-[#210846] shadow-[0_25px_80px_rgba(55,20,90,.15)]">
-
             <img
               src={image}
-              alt={`${title} dashboard`}
+              alt={`${title || heading} dashboard`}
               className="block w-full h-auto object-cover"
             />
-
           </div>
         )}
-
 
         {/* PRODUCT INFORMATION */}
 
         <div className="mt-10 grid md:grid-cols-2 gap-6">
-
           {/* GAP */}
 
           <div className="card p-7">
-
             <h2 className="text-2xl font-bold">
               The Gap We Close
             </h2>
@@ -84,14 +68,11 @@ function ProductPage({
             <p className="mt-3 text-[#756b86] leading-7">
               {description}
             </p>
-
           </div>
-
 
           {/* SOLUTION */}
 
           <div className="card p-7">
-
             <h2 className="text-2xl font-bold">
               How BrandCliqs Helps
             </h2>
@@ -99,17 +80,12 @@ function ProductPage({
             <p className="mt-3 text-[#756b86] leading-7">
               {solution}
             </p>
-
           </div>
-
         </div>
-
       </div>
-
     </main>
   );
 }
-
 
 /* -------------------------------- */
 /* JOBS */
@@ -118,9 +94,7 @@ function ProductPage({
 function Jobs() {
   return (
     <main className="container-x py-16">
-
       <div className="max-w-3xl">
-
         <span className="chip">
           Jobs / Hiring
         </span>
@@ -135,7 +109,6 @@ function Jobs() {
         </p>
 
         <div className="card p-7 mt-10">
-
           <h2 className="text-2xl font-bold">
             Opportunities
           </h2>
@@ -152,15 +125,11 @@ function Jobs() {
           >
             Contact Hiring Team
           </a>
-
         </div>
-
       </div>
-
     </main>
   );
 }
-
 
 /* -------------------------------- */
 /* BLOG */
@@ -169,9 +138,7 @@ function Jobs() {
 function Blog() {
   return (
     <main className="container-x py-16">
-
       <div className="max-w-4xl">
-
         <span className="chip">
           Blog — BrandCliqs
         </span>
@@ -186,9 +153,7 @@ function Blog() {
         </p>
 
         <div className="grid md:grid-cols-2 gap-6 mt-10">
-
           <article className="card p-7">
-
             <h2 className="text-xl font-bold">
               Building a smarter marketing stack
             </h2>
@@ -197,12 +162,9 @@ function Blog() {
               Discover how connected tools can simplify
               marketing workflows.
             </p>
-
           </article>
 
-
           <article className="card p-7">
-
             <h2 className="text-xl font-bold">
               Turning marketing data into growth
             </h2>
@@ -211,17 +173,12 @@ function Blog() {
               Learn how better analytics can help teams make
               stronger decisions.
             </p>
-
           </article>
-
         </div>
-
       </div>
-
     </main>
   );
 }
-
 
 /* -------------------------------- */
 /* APP */
@@ -233,16 +190,13 @@ export default function App() {
       <ScrollTop />
 
       <SiteLayout>
-
         <Routes>
-
           {/* HOME */}
 
           <Route
             path="/"
             element={<Home />}
           />
-
 
           {/* DISCOVER */}
 
@@ -251,28 +205,18 @@ export default function App() {
             element={<Explore />}
           />
 
-
-          {/* -------------------------------- */}
           {/* PRODUCTS */}
-          {/* -------------------------------- */}
-
-
-          {/* TOOL MARKETPLACE */}
 
           <Route
             path="/products/tool-marketplace"
             element={
               <ProductPage
-                title="Tool Marketplace"
                 heading="Build your perfect marketing stack & integration in minutes."
                 description="Juggling 100+ marketing platforms, repeating manual tasks, and running campaigns that feel scattered and slow."
                 solution="All-in-one tools to plan, automate, and manage your campaigns from a single dashboard."
               />
             }
           />
-
-
-          {/* GROWTH ANALYTICS */}
 
           <Route
             path="/products/growth-analytics"
@@ -287,9 +231,6 @@ export default function App() {
             }
           />
 
-
-          {/* AGENCY CLIQ */}
-
           <Route
             path="/products/agency-cliq"
             element={
@@ -301,9 +242,6 @@ export default function App() {
               />
             }
           />
-
-
-          {/* GROWTH INSIGHTS */}
 
           <Route
             path="/products/growth-insights"
@@ -317,7 +255,6 @@ export default function App() {
             }
           />
 
-
           {/* TOOL DETAILS */}
 
           <Route
@@ -325,10 +262,7 @@ export default function App() {
             element={<ToolDetails />}
           />
 
-
-          {/* -------------------------------- */}
           {/* EXISTING PAGES */}
-          {/* -------------------------------- */}
 
           <Route
             path="/about"
@@ -351,6 +285,11 @@ export default function App() {
           />
 
           <Route
+            path="/solutions/use-cases"
+            element={<Solutions />}
+          />
+
+          <Route
             path="/preview"
             element={<Preview />}
           />
@@ -360,10 +299,7 @@ export default function App() {
             element={<Recommendations />}
           />
 
-
-          {/* -------------------------------- */}
           {/* AUTH */}
-          {/* -------------------------------- */}
 
           <Route
             path="/login"
@@ -380,10 +316,7 @@ export default function App() {
             element={<ForgotPassword />}
           />
 
-
-          {/* -------------------------------- */}
           {/* OTHER */}
-          {/* -------------------------------- */}
 
           <Route
             path="/support"
@@ -395,10 +328,7 @@ export default function App() {
             element={<Compare />}
           />
 
-
-          {/* -------------------------------- */}
           {/* RESOURCES */}
-          {/* -------------------------------- */}
 
           <Route
             path="/jobs"
@@ -410,10 +340,7 @@ export default function App() {
             element={<Blog />}
           />
 
-
-          {/* -------------------------------- */}
           {/* LEGAL */}
-          {/* -------------------------------- */}
 
           <Route
             path="/privacy"
@@ -425,10 +352,7 @@ export default function App() {
             element={<Terms />}
           />
 
-
-          {/* -------------------------------- */}
           {/* DASHBOARD */}
-          {/* -------------------------------- */}
 
           <Route
             path="/dashboard"
@@ -439,7 +363,6 @@ export default function App() {
             }
           />
 
-
           <Route
             path="/lists/:id"
             element={
@@ -449,10 +372,7 @@ export default function App() {
             }
           />
 
-
-          {/* -------------------------------- */}
           {/* ADMIN */}
-          {/* -------------------------------- */}
 
           <Route
             path="/admin"
@@ -463,18 +383,13 @@ export default function App() {
             }
           />
 
-
-          {/* -------------------------------- */}
           {/* FALLBACK */}
-          {/* -------------------------------- */}
 
           <Route
             path="*"
             element={<Home />}
           />
-
         </Routes>
-
       </SiteLayout>
     </>
   );

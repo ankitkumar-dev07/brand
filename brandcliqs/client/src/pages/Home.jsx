@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom';
 
 import {
@@ -38,14 +39,6 @@ import perplexityLogo from '../assets/Perplexity.png';
 import runwayLogo from '../assets/Runway.png';
 import youtubeLogo from '../assets/YouTube.png';
 import zapierLogo from '../assets/Zapier.png';
-
-const values = [
-  ['Simplicity', 'Everything within a click or two.', Zap],
-  ['Trust', 'Curated, honest, and regularly updated listings.', ShieldCheck],
-  ['Growth', 'Tools that help people and businesses grow.', ArrowRight],
-  ['Inclusivity', 'Built for startups, enterprises, and individuals.', Layers],
-  ['Discovery', 'Helping users find tools they did not know existed.', Compass],
-];
 
 const discoverFeatures = [
   {
@@ -338,7 +331,6 @@ export default function Home() {
       </section>
 
       {/* ================= POPULAR TOOLS ================= */}
-      {/* No tools? Hide this entire section, including its fallback card. */}
 
       {tools.length > 0 && (
         <section className="container-x py-16">
@@ -382,7 +374,7 @@ export default function Home() {
             </span>
 
             <h2 className="mt-3 text-3xl md:text-5xl font-extrabold">
-              Amplify your marketing engine.
+              Ready to scale your marketing?
             </h2>
 
             <p className="mt-4 text-white/70 leading-7">
@@ -406,39 +398,6 @@ export default function Home() {
                 Log in
               </Link>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ================= CORE VALUES ================= */}
-
-      <section className="py-20 border-y border-[#eee9f2]">
-        <div className="container-x text-center">
-          <span className="chip border-orange-200 text-orange-500 bg-orange-50">
-            Core Values
-          </span>
-
-          <h2 className="mt-4 text-4xl font-bold">What we stand for</h2>
-
-          <p className="mt-3 text-lg text-[#756b86]">
-            The principles that guide every listing, every suggestion, every
-            click.
-          </p>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4 mt-10 text-left">
-            {values.map(([title, description, Icon]) => (
-              <div className="card p-6" key={title}>
-                <div className="h-11 w-11 rounded-xl bg-[#f3e8ff] grid place-items-center text-[#6D28D9]">
-                  <Icon size={20} />
-                </div>
-
-                <h3 className="mt-5 font-semibold text-lg">{title}</h3>
-
-                <p className="mt-2 text-[#756b86] text-sm leading-6">
-                  {description}
-                </p>
-              </div>
-            ))}
           </div>
         </div>
       </section>

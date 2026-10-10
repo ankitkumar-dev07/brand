@@ -1,106 +1,75 @@
+
 import { Link } from 'react-router-dom';
-import Logo from './Logo';
-import { useState } from 'react';
-import api from '../services/api';
-import toast from 'react-hot-toast';
+
+const footerColumns = [
+  {
+    title: 'Products',
+    links: [
+      { label: 'Tool Marketplace', to: '/products/tool-marketplace' },
+      { label: 'Growth Analytics', to: '/products/growth-analytics' },
+      { label: 'Agency Cliq', to: '/products/agency-cliq' },
+      { label: 'Growth Insights', to: '/products/growth-insights' },
+      { label: 'Integrations', to: '/features' },
+    ],
+  },
+  {
+    title: 'Solutions',
+    links: [
+      { label: 'For Sales Teams', to: '/solutions' },
+      { label: 'For Marketing Teams', to: '/solutions' },
+      { label: 'For RevOps Teams', to: '/solutions' },
+      { label: 'For Recruiters', to: '/solutions' },
+    ],
+  },
+  {
+    title: 'Resources',
+    links: [
+      { label: 'Articles', to: '/blog' },
+      { label: 'Events', to: '/blog' },
+      { label: 'Changelog', to: '/blog' },
+      { label: 'API docs', to: '/support' },
+      { label: 'Help Center', to: '/support' },
+      { label: 'Careers', to: '/jobs' },
+    ],
+  },
+  {
+    title: 'Legal',
+    links: [
+      { label: 'Terms of Service', to: '/terms' },
+      { label: 'Privacy Policy', to: '/privacy' },
+      { label: 'Cookie Policy', to: '/privacy' },
+      { label: 'Cookie Preferences', to: '/privacy' },
+      { label: 'Security', to: '/support' },
+    ],
+  },
+];
 
 export default function Footer() {
-  const [email, setEmail] = useState('');
-
-  const join = async (e) => {
-    e.preventDefault();
-
-    try {
-      await api.post('/newsletter/subscribe', { email });
-      toast.success('You are on the list!');
-      setEmail('');
-    } catch (err) {
-      toast.error(
-        err.response?.data?.message || 'Could not subscribe'
-      );
-    }
-  };
-
   return (
-    <footer className="border-t border-[#eee9f2] bg-[#fdfcff] mt-20">
-      <div className="container-x py-14 grid md:grid-cols-4 gap-10">
-        <div>
-          <Logo />
+    <footer className="mt-20 border-t border-[#eee9f2] bg-gradient-to-r from-[#f3e8ff] via-[#fff7fc] to-[#fff0df]">
+      <div className="container-x py-14 md:py-16">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-4 md:gap-x-10">
+          {footerColumns.map((column) => (
+            <div key={column.title}>
+              <h4 className="mb-5 text-base font-semibold text-[#292536]">
+                {column.title}
+              </h4>
 
-          <p className="mt-5 text-[#756b86] leading-7">
-            The single starting point for software decisions.
-          </p>
-        </div>
-
-        <div>
-          <h4 className="font-semibold mb-4">Product</h4>
-
-          <div className="space-y-3 text-[#756b86]">
-            <Link className="block" to="/explore">
-              Explore
-            </Link>
-
-            <Link className="block" to="/features">
-              Features
-            </Link>
-
-            <Link className="block" to="/pricing">
-              Pricing
-            </Link>
-          </div>
-        </div>
-
-        <div>
-          <h4 className="font-semibold mb-4">Company</h4>
-
-          <div className="space-y-3 text-[#756b86]">
-            <Link className="block" to="/about">
-              Meet BrandCliqs
-            </Link>
-
-            <Link className="block" to="/support">
-              Support
-            </Link>
-          </div>
-        </div>
-
-        <div>
-          <h4 className="font-semibold mb-4">Stay in the loop</h4>
-
-          <p className="text-[#756b86] mb-4">
-            Weekly picks, no spam.
-          </p>
-
-          <form onSubmit={join} className="flex gap-2">
-            <input
-              className="input"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@gmail.com"
-              type="email"
-              required
-            />
-
-            <button className="btn btn-primary">
-              Join
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <div className="border-t border-[#eee9f2]">
-        <div className="container-x py-5 text-sm text-[#756b86] flex flex-wrap gap-5 justify-center">
-          © 2026 BrandCliqs. All rights reserved.
-
-          <Link to="/privacy">
-            Privacy Policy
-          </Link>
-
-          <span>·</span>
-
-          <Link to="/terms">
-            Terms of Use
-          </Link>
+              <nav className="space-y-5">
+                {column.links.map((link) => (
+                  <Link
+                    key={link.label}
+                    to={link.to}
+                    className="group block w-fit text-sm md:text-base leading-6 text-[#756b86] transition-all duration-300 hover:translate-x-1"
+                  >
+                    <span className="transition-colors duration-300 group-hover:bg-gradient-to-r group-hover:from-[#6D28D9] group-hover:via-[#c65bd4] group-hover:to-[#FF8A00] group-hover:bg-clip-text group-hover:text-transparent">
+                      {link.label}
+                    </span>
+                  </Link>
+                ))}
+              </nav>
+            </div>
+          ))}
         </div>
       </div>
     </footer>
