@@ -1,3 +1,4 @@
+
 import {
   ArrowRight,
   Compass,
@@ -39,9 +40,7 @@ export default function About() {
     <main className="container-x py-14">
       <section className="grid lg:grid-cols-2 gap-12 items-start">
         <div>
-          <span className="chip">Meet BrandCliqs</span>
-
-          <h1 className="mt-5 text-5xl font-extrabold tracking-tight">
+          <h1 className="text-5xl font-extrabold tracking-tight">
             Made to end the endless tab-switching.
           </h1>
 

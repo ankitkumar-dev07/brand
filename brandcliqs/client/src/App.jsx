@@ -1,3 +1,4 @@
+
 import { Routes, Route } from 'react-router-dom';
 
 import SiteLayout from './layouts/SiteLayout';
@@ -37,13 +38,9 @@ function ProductPage({
   return (
     <main className="container-x py-16">
       <div className="max-w-6xl">
-        {/* PRODUCT HEADING — LABEL BOX REMOVED */}
-
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#171322] tracking-tight">
           {heading}
         </h1>
-
-        {/* PRODUCT IMAGE */}
 
         {image && (
           <div className="mt-10 overflow-hidden rounded-[28px] border border-[#eee9f2] bg-[#210846] shadow-[0_25px_80px_rgba(55,20,90,.15)]">
@@ -55,14 +52,10 @@ function ProductPage({
           </div>
         )}
 
-        {/* PRODUCT INFORMATION */}
-
         <div className="mt-10 grid md:grid-cols-2 gap-6">
-          {/* GAP */}
-
           <div className="card p-7">
             <h2 className="text-2xl font-bold">
-              The Gap We Close
+              Challenges
             </h2>
 
             <p className="mt-3 text-[#756b86] leading-7">
@@ -70,11 +63,9 @@ function ProductPage({
             </p>
           </div>
 
-          {/* SOLUTION */}
-
           <div className="card p-7">
             <h2 className="text-2xl font-bold">
-              How BrandCliqs Helps
+              The Gap We Close
             </h2>
 
             <p className="mt-3 text-[#756b86] leading-7">
@@ -95,11 +86,7 @@ function Jobs() {
   return (
     <main className="container-x py-16">
       <div className="max-w-3xl">
-        <span className="chip">
-          Jobs / Hiring
-        </span>
-
-        <h1 className="mt-5 text-4xl md:text-5xl font-extrabold">
+        <h1 className="text-4xl md:text-5xl font-extrabold">
           Build the future with BrandCliqs.
         </h1>
 
@@ -139,11 +126,7 @@ function Blog() {
   return (
     <main className="container-x py-16">
       <div className="max-w-4xl">
-        <span className="chip">
-          Blog — BrandCliqs
-        </span>
-
-        <h1 className="mt-5 text-4xl md:text-5xl font-extrabold">
+        <h1 className="text-4xl md:text-5xl font-extrabold">
           Marketing ideas, tools and growth insights.
         </h1>
 
@@ -191,21 +174,9 @@ export default function App() {
 
       <SiteLayout>
         <Routes>
-          {/* HOME */}
+          <Route path="/" element={<Home />} />
 
-          <Route
-            path="/"
-            element={<Home />}
-          />
-
-          {/* DISCOVER */}
-
-          <Route
-            path="/explore"
-            element={<Explore />}
-          />
-
-          {/* PRODUCTS */}
+          <Route path="/explore" element={<Explore />} />
 
           <Route
             path="/products/tool-marketplace"
@@ -255,104 +226,28 @@ export default function App() {
             }
           />
 
-          {/* TOOL DETAILS */}
+          <Route path="/tools/:slug" element={<ToolDetails />} />
 
-          <Route
-            path="/tools/:slug"
-            element={<ToolDetails />}
-          />
+          <Route path="/about" element={<About />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/features" element={<Features />} />
+          <Route path="/solutions" element={<Solutions />} />
+          <Route path="/solutions/use-cases" element={<Solutions />} />
+          <Route path="/preview" element={<Preview />} />
+          <Route path="/recommendations" element={<Recommendations />} />
 
-          {/* EXISTING PAGES */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
 
-          <Route
-            path="/about"
-            element={<About />}
-          />
+          <Route path="/support" element={<Support />} />
+          <Route path="/compare" element={<Compare />} />
 
-          <Route
-            path="/pricing"
-            element={<Pricing />}
-          />
+          <Route path="/jobs" element={<Jobs />} />
+          <Route path="/blog" element={<Blog />} />
 
-          <Route
-            path="/features"
-            element={<Features />}
-          />
-
-          <Route
-            path="/solutions"
-            element={<Solutions />}
-          />
-
-          <Route
-            path="/solutions/use-cases"
-            element={<Solutions />}
-          />
-
-          <Route
-            path="/preview"
-            element={<Preview />}
-          />
-
-          <Route
-            path="/recommendations"
-            element={<Recommendations />}
-          />
-
-          {/* AUTH */}
-
-          <Route
-            path="/login"
-            element={<Login />}
-          />
-
-          <Route
-            path="/register"
-            element={<Register />}
-          />
-
-          <Route
-            path="/forgot-password"
-            element={<ForgotPassword />}
-          />
-
-          {/* OTHER */}
-
-          <Route
-            path="/support"
-            element={<Support />}
-          />
-
-          <Route
-            path="/compare"
-            element={<Compare />}
-          />
-
-          {/* RESOURCES */}
-
-          <Route
-            path="/jobs"
-            element={<Jobs />}
-          />
-
-          <Route
-            path="/blog"
-            element={<Blog />}
-          />
-
-          {/* LEGAL */}
-
-          <Route
-            path="/privacy"
-            element={<Privacy />}
-          />
-
-          <Route
-            path="/terms"
-            element={<Terms />}
-          />
-
-          {/* DASHBOARD */}
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
 
           <Route
             path="/dashboard"
@@ -372,8 +267,6 @@ export default function App() {
             }
           />
 
-          {/* ADMIN */}
-
           <Route
             path="/admin"
             element={
@@ -383,12 +276,7 @@ export default function App() {
             }
           />
 
-          {/* FALLBACK */}
-
-          <Route
-            path="*"
-            element={<Home />}
-          />
+          <Route path="*" element={<Home />} />
         </Routes>
       </SiteLayout>
     </>

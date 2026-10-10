@@ -1,3 +1,4 @@
+
 import { Link, useLocation } from 'react-router-dom';
 
 import {
@@ -30,9 +31,10 @@ export default function Navbar() {
     ['Growth Insights', '/products/growth-insights'],
   ];
 
+  // Updated Use Cases route
   const solutions = [
     ['Solutions — For', '/solutions'],
-    ['Solutions — Use Cases', '/solutions'],
+    ['Solutions — Use Cases', '/solutions/use-cases'],
   ];
 
   const resources = [

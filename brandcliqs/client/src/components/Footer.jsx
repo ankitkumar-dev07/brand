@@ -9,16 +9,15 @@ const footerColumns = [
       { label: 'Growth Analytics', to: '/products/growth-analytics' },
       { label: 'Agency Cliq', to: '/products/agency-cliq' },
       { label: 'Growth Insights', to: '/products/growth-insights' },
-      { label: 'Integrations', to: '/features' },
     ],
   },
   {
     title: 'Solutions',
     links: [
-      { label: 'For Sales Teams', to: '/solutions' },
-      { label: 'For Marketing Teams', to: '/solutions' },
-      { label: 'For RevOps Teams', to: '/solutions' },
-      { label: 'For Recruiters', to: '/solutions' },
+      { label: 'Marketers', to: '/solutions' },
+      { label: 'Startups', to: '/solutions' },
+      { label: 'Enterprise', to: '/solutions' },
+      { label: 'Students / Universities', to: '/solutions' },
     ],
   },
   {

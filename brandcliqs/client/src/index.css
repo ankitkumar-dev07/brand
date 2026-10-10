@@ -5,65 +5,49 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ================================
+   BrandCliqs — Global Styles
+================================ */
+
 :root {
-  font-family: Inter, ui-sans-serif, system-ui;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   color: #171322;
   background: #fff;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+
+  --bc-purple: #6d28d9;
+  --bc-purple-dark: #5b21b6;
+  --bc-purple-light: #c4b5fd;
+  --bc-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --bc-duration: 650ms;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
 }
 
 body {
   margin: 0;
   min-width: 320px;
+  overflow-x: hidden;
 }
 
 .container-x {
   width: min(1180px, calc(100% - 40px));
-  margin: auto;
+  margin-inline: auto;
 }
 
-/* Gradient text */
-
-.gradient-text {
-  background: linear-gradient(90deg, #6D28D9, #c65bd4, #FF8A00);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: gradient-shift 6s ease-in-out infinite alternate;
-}
-
-@keyframes gradient-shift {
-  from {
-    background-position: 0% 50%;
-  }
-  to {
-    background-position: 100% 50%;
-  }
-}
-
-/* Links and buttons */
-
-a,
-button {
-  transition:
-    color 0.25s ease,
-    background-color 0.25s ease,
-    border-color 0.25s ease,
-    text-shadow 0.25s ease;
-}
-
-a:hover,
-button:hover {
-  text-shadow: 0 0 16px rgba(109, 40, 217, 0.12);
-}
-
-/* Soft grid and shadows */
+/* ================================
+   Backgrounds and Effects
+================================ */
 
 .soft-grid {
   background-image:
@@ -78,10 +62,51 @@ button:hover {
 
 .glass {
   background: rgba(255, 255, 255, 0.78);
+  -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
 }
 
-/* Buttons */
+/* ================================
+   Animated Gradient Text
+================================ */
+
+.gradient-text {
+  background: linear-gradient(
+    90deg,
+    #6d28d9,
+    #c65bd4,
+    #ff8a00,
+    #6d28d9
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: bc-gradient 7s ease-in-out infinite alternate;
+}
+
+@keyframes bc-gradient {
+  from {
+    background-position: 0% 50%;
+  }
+
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+/* ================================
+   Buttons and Links
+================================ */
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  transition: color 220ms ease;
+}
 
 .btn {
   display: inline-flex;
@@ -91,23 +116,26 @@ button:hover {
   border-radius: 12px;
   padding: 11px 17px;
   font-weight: 600;
+  text-decoration: none;
   transition:
-    transform 0.25s ease,
-    background-color 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
+    transform 220ms var(--bc-ease),
+    background-color 250ms ease,
+    border-color 250ms ease,
+    box-shadow 250ms ease,
+    color 220ms ease;
 }
 
 .btn-primary {
-  background: #6D28D9;
   color: #fff;
+  background: var(--bc-purple);
   box-shadow: 0 8px 18px rgba(109, 40, 217, 0.2);
 }
 
 .btn-primary:hover {
+  color: #fff;
+  background: var(--bc-purple-dark);
   transform: translateY(-2px);
-  background: #5b21b6;
-  box-shadow: 0 12px 25px rgba(109, 40, 217, 0.28);
+  box-shadow: 0 12px 26px rgba(109, 40, 217, 0.25);
 }
 
 .btn-outline {
@@ -116,23 +144,44 @@ button:hover {
 }
 
 .btn-outline:hover {
-  border-color: #c4b5fd;
+  border-color: var(--bc-purple-light);
   background: #faf7ff;
+  transform: translateY(-2px);
 }
 
-/* Chips */
+.btn:active,
+button:active {
+  transform: scale(0.98);
+}
+
+/* ================================
+   Chips
+================================ */
 
 .chip {
+  display: inline-flex;
+  align-items: center;
   border: 1px solid #ddd2f4;
-  background: #faf7ff;
-  color: #5b21b6;
   border-radius: 999px;
   padding: 7px 12px;
+  color: var(--bc-purple-dark);
+  background: #faf7ff;
   font-size: 13px;
   font-weight: 600;
+  transition:
+    transform 220ms var(--bc-ease),
+    background-color 220ms ease,
+    border-color 220ms ease;
 }
 
-/* Inputs */
+.chip:hover {
+  transform: translateY(-2px);
+  border-color: rgba(109, 40, 217, 0.4);
+}
+
+/* ================================
+   Form Inputs
+================================ */
 
 .input {
   width: 100%;
@@ -141,94 +190,294 @@ button:hover {
   padding: 12px 14px;
   outline: none;
   background: #fff;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease;
 }
 
-.input:focus {
+.input:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
   border-color: #8b5cf6;
   box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.12);
 }
 
-/* Cards */
+/* ================================
+   Cards
+================================ */
 
 .card {
   border: 1px solid #e8e3ed;
   border-radius: 18px;
   background: #fff;
   box-shadow: 0 5px 22px rgba(27, 18, 39, 0.045);
+  transition:
+    transform 300ms var(--bc-ease),
+    box-shadow 300ms ease,
+    border-color 300ms ease;
 }
 
-/* Logo animation */
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(109, 40, 217, 0.24);
+  box-shadow: 0 16px 36px rgba(31, 18, 56, 0.09);
+}
 
-@keyframes logo-marquee {
+.card img {
+  transition: transform 500ms var(--bc-ease);
+}
+
+.card:hover img {
+  transform: scale(1.025);
+}
+
+.card svg {
+  transition:
+    transform 250ms var(--bc-ease),
+    color 250ms ease;
+}
+
+.card:hover svg {
+  transform: translateY(-2px);
+}
+
+/* ================================
+   Hero Animations
+================================ */
+
+@keyframes bc-fade-up {
   from {
-    transform: translateX(0);
+    opacity: 0;
+    transform: translateY(24px);
   }
+
   to {
-    transform: translateX(-50%);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-.animate-logo-marquee {
-  animation: logo-marquee 45s linear infinite;
-  will-change: transform;
+@keyframes bc-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
-/* FullEnrich-inspired text reveal — NO BLUR */
+@keyframes bc-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes bc-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in-up {
+  animation: bc-fade-up 750ms var(--bc-ease) both;
+}
+
+.animate-float {
+  animation: bc-float 4s ease-in-out infinite;
+}
+
+.animate-scale-in {
+  animation: bc-scale-in 550ms var(--bc-ease) both;
+}
+
+.animate-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animate-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animate-delay-300 {
+  animation-delay: 300ms;
+}
+
+/* ================================
+   Scroll Reveal
+   Activated by the React component
+================================ */
+
+.bc-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--bc-duration) var(--bc-ease),
+    transform var(--bc-duration) var(--bc-ease);
+  transition-delay: var(--bc-reveal-delay, 0ms);
+}
+
+.bc-reveal.bc-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Optional stagger for child cards */
+
+.bc-stagger > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 550ms var(--bc-ease),
+    transform 550ms var(--bc-ease);
+}
+
+.bc-stagger.bc-reveal-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.bc-stagger.bc-reveal-visible > *:nth-child(1) {
+  transition-delay: 60ms;
+}
+
+.bc-stagger.bc-reveal-visible > *:nth-child(2) {
+  transition-delay: 130ms;
+}
+
+.bc-stagger.bc-reveal-visible > *:nth-child(3) {
+  transition-delay: 200ms;
+}
+
+.bc-stagger.bc-reveal-visible > *:nth-child(4) {
+  transition-delay: 270ms;
+}
+
+.bc-stagger.bc-reveal-visible > *:nth-child(5) {
+  transition-delay: 340ms;
+}
+
+.bc-stagger.bc-reveal-visible > *:nth-child(6) {
+  transition-delay: 410ms;
+}
+
+/* Existing text-reveal compatibility */
 
 .text-reveal {
   opacity: 0;
   transform: translateY(18px);
-  filter: none !important;
+  filter: none;
   transition:
-    opacity 650ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 650ms var(--bc-ease),
+    transform 650ms var(--bc-ease);
   transition-delay: var(--text-delay, 0ms);
 }
 
 .text-reveal.text-reveal-visible {
   opacity: 1;
   transform: translateY(0);
-  filter: none !important;
 }
 
-/* Accessibility */
+/* ================================
+   Company Logo Marquee
+================================ */
+
+@keyframes bc-logo-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-logo-marquee {
+  animation: bc-logo-marquee 45s linear infinite;
+  will-change: transform;
+}
+
+.logo-marquee:hover .animate-logo-marquee {
+  animation-play-state: paused;
+}
+
+/* ================================
+   Dropdowns and Loading
+================================ */
+
+header nav .absolute > div {
+  animation: bc-fade-up 180ms var(--bc-ease) both;
+  transform-origin: top center;
+}
+
+.animate-pulse {
+  animation-duration: 1.5s;
+}
+
+/* ================================
+   Keyboard Accessibility
+================================ */
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 4px;
+}
+
+/* ================================
+   Responsive and Reduced Motion
+================================ */
+
+@media (max-width: 640px) {
+  .container-x {
+    width: min(100% - 32px, 1180px);
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
+    scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }
 
-  .animate-logo-marquee {
-    animation: none;
-  }
-
+  .bc-reveal,
+  .bc-reveal.bc-reveal-visible,
+  .bc-stagger > *,
   .text-reveal,
   .text-reveal.text-reveal-visible {
-    opacity: 1;
-    transform: none;
-    filter: none !important;
-    transition: none;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
-}
 
+  .animate-logo-marquee {
+    animation: none !important;
+  }
 
-/* FIX: Keep text visible if animation fails */
-
-.text-reveal {
-  opacity: 1 !important;
-  transform: none !important;
-  filter: none !important;
-  animation: none !important;
-  transition: none !important;
-}
-
-.text-reveal.text-reveal-visible {
-  opacity: 1 !important;
-  transform: none !important;
-  filter: none !important;
+  .card:hover,
+  .btn:hover,
+  .chip:hover {
+    transform: none;
+  }
 }

@@ -1,3 +1,4 @@
+
 import { Link, useLocation } from 'react-router-dom';
 
 const audienceSolutions = [
@@ -95,171 +96,157 @@ const useCases = [
   },
 ];
 
+function SolutionsFor() {
+  return (
+    <>
+      <section className="max-w-4xl">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#171322]">
+          Built around your goals.
+        </h1>
+
+        <p className="mt-5 max-w-3xl text-lg text-[#756b86] leading-8">
+          Choose the experience that best fits your team, business or
+          learning journey.
+        </p>
+      </section>
+
+      <section className="mt-10 grid md:grid-cols-2 gap-6">
+        {audienceSolutions.map((item) => (
+          <article
+            key={item.title}
+            className="card p-6 md:p-7 transition-all duration-200 hover:-translate-y-1 hover:shadow-soft"
+          >
+            <h2 className="text-2xl font-bold text-[#171322]">
+              {item.title}
+            </h2>
+
+            <p className="mt-2 text-lg font-semibold text-[#6D28D9]">
+              {item.subtitle}
+            </p>
+
+            <p className="mt-4 text-[#756b86] leading-7">
+              {item.description}
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-2">
+              {item.highlights.map((highlight) => (
+                <span
+                  key={highlight}
+                  className="rounded-full bg-[#f8f5fb] px-3 py-2 text-sm text-[#5f556d]"
+                >
+                  {highlight}
+                </span>
+              ))}
+            </div>
+          </article>
+        ))}
+      </section>
+    </>
+  );
+}
+
+function SolutionsUseCases() {
+  return (
+    <>
+      <section className="max-w-4xl">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#171322]">
+          Solve the problems slowing your growth.
+        </h1>
+
+        <p className="mt-5 max-w-3xl text-lg text-[#756b86] leading-8">
+          From finding the right tools to connecting with the right
+          agency, BrandCliqs brings everything together.
+        </p>
+      </section>
+
+      <section className="mt-10 space-y-8">
+        {useCases.map((item) => (
+          <article
+            key={item.title}
+            className="card p-6 md:p-9 transition-all duration-200 hover:shadow-soft"
+          >
+            <div className="flex flex-col gap-7">
+              <div className="flex gap-5 items-start">
+                <div className="h-12 w-12 shrink-0 rounded-xl bg-[#f3eefe] text-[#6D28D9] grid place-items-center font-bold">
+                  {item.number}
+                </div>
+
+                <div>
+                  <p className="text-sm font-bold uppercase tracking-wide text-[#6D28D9]">
+                    {item.title}
+                  </p>
+
+                  <h2 className="mt-2 text-2xl md:text-3xl font-bold text-[#171322]">
+                    {item.heading}
+                  </h2>
+                </div>
+              </div>
+
+              {item.image && (
+                <div className="w-full overflow-hidden rounded-2xl border border-[#eee9f2] bg-[#210846] shadow-[0_25px_70px_rgba(55,20,90,.15)]">
+                  <img
+                    src={item.image}
+                    alt="Agency Cliq dashboard"
+                    className="block w-full h-auto"
+                  />
+                </div>
+              )}
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="font-bold text-[#171322]">
+                    The Gap We Close
+                  </h3>
+
+                  <p className="mt-2 text-[#756b86] leading-7">
+                    {item.description}
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-bold text-[#171322]">
+                    The BrandCliqs Solution
+                  </h3>
+
+                  <p className="mt-2 text-[#756b86] leading-7">
+                    {item.solution}
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <Link
+                  to={item.to}
+                  className="inline-flex items-center gap-2 font-semibold text-[#6D28D9] transition-colors hover:text-[#c65bd4]"
+                >
+                  Explore {item.title}
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </div>
+          </article>
+        ))}
+      </section>
+
+      <section className="mt-12">
+        <Link
+          to="/solutions"
+          className="inline-flex items-center gap-2 rounded-xl border border-[#e6d9f8] px-5 py-3 font-semibold text-[#6D28D9] transition-all hover:bg-[#f8f5ff]"
+        >
+          ← Back to Solutions
+        </Link>
+      </section>
+    </>
+  );
+}
+
 export default function Solutions() {
   const location = useLocation();
   const isUseCases = location.pathname === '/solutions/use-cases';
 
   return (
     <main className="container-x py-12 md:py-16">
-      {isUseCases ? (
-        <>
-          {/* SOLUTIONS — USE CASES */}
-
-          <section className="max-w-4xl">
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-[#171322]">
-              Solve the problems slowing your growth.
-            </h1>
-
-            <p className="mt-5 max-w-3xl text-lg text-[#756b86] leading-8">
-              From finding the right tools to connecting with the right
-              agency, BrandCliqs brings everything together.
-            </p>
-          </section>
-
-          <section className="mt-10 space-y-8">
-            {useCases.map((item) => (
-              <article
-                key={item.title}
-                className="card p-6 md:p-9 transition-all duration-200 hover:shadow-soft"
-              >
-                <div className="flex flex-col gap-7">
-                  {/* NUMBER AND TITLE */}
-
-                  <div className="flex gap-5 items-start">
-                    <div className="h-12 w-12 shrink-0 rounded-xl bg-[#f3eefe] text-[#6D28D9] grid place-items-center font-bold">
-                      {item.number}
-                    </div>
-
-                    <div>
-                      <p className="text-sm font-bold uppercase tracking-wide text-[#6D28D9]">
-                        {item.title}
-                      </p>
-
-                      <h2 className="mt-2 text-2xl md:text-3xl font-bold text-[#171322]">
-                        {item.heading}
-                      </h2>
-                    </div>
-                  </div>
-
-                  {/* AGENCY CLIQ IMAGE */}
-
-                  {item.image && (
-                    <div className="w-full overflow-hidden rounded-2xl border border-[#eee9f2] bg-[#210846] shadow-[0_25px_70px_rgba(55,20,90,.15)]">
-                      <img
-                        src={item.image}
-                        alt="Agency Cliq dashboard"
-                        className="block w-full h-auto"
-                      />
-                    </div>
-                  )}
-
-                  {/* GAP AND SOLUTION */}
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <h3 className="font-bold text-[#171322]">
-                        The Gap We Close
-                      </h3>
-
-                      <p className="mt-2 text-[#756b86] leading-7">
-                        {item.description}
-                      </p>
-                    </div>
-
-                    <div>
-                      <h3 className="font-bold text-[#171322]">
-                        The BrandCliqs Solution
-                      </h3>
-
-                      <p className="mt-2 text-[#756b86] leading-7">
-                        {item.solution}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* EXPLORE LINK */}
-
-                  <div>
-                    <Link
-                      to={item.to}
-                      className="inline-flex items-center gap-2 font-semibold text-[#6D28D9] transition-colors hover:text-[#c65bd4]"
-                    >
-                      Explore {item.title}
-                      <span aria-hidden="true">→</span>
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </section>
-
-          <section className="mt-12">
-            <Link
-              to="/solutions"
-              className="inline-flex items-center gap-2 rounded-xl border border-[#e6d9f8] px-5 py-3 font-semibold text-[#6D28D9] transition-all hover:bg-[#f8f5ff]"
-            >
-              ← Back to Solutions
-            </Link>
-          </section>
-        </>
-      ) : (
-        <>
-          {/* SOLUTIONS — FOR */}
-
-          <section className="max-w-4xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#171322]">
-              Built around your goals.
-            </h1>
-
-            <p className="mt-5 max-w-3xl text-lg text-[#756b86] leading-8">
-              Choose the experience that best fits your team, business or
-              learning journey.
-            </p>
-          </section>
-
-          <section className="mt-10 grid md:grid-cols-2 gap-6">
-            {audienceSolutions.map((item) => (
-              <article
-                key={item.title}
-                className="card p-6 md:p-7 transition-all duration-200 hover:-translate-y-1 hover:shadow-soft"
-              >
-                <h2 className="text-2xl font-bold text-[#171322]">
-                  {item.title}
-                </h2>
-
-                <p className="mt-2 text-lg font-semibold text-[#6D28D9]">
-                  {item.subtitle}
-                </p>
-
-                <p className="mt-4 text-[#756b86] leading-7">
-                  {item.description}
-                </p>
-
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {item.highlights.map((highlight) => (
-                    <span
-                      key={highlight}
-                      className="rounded-full bg-[#f8f5fb] px-3 py-2 text-sm text-[#5f556d]"
-                    >
-                      {highlight}
-                    </span>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </section>
-
-          <section className="mt-12">
-            <Link
-              to="/solutions/use-cases"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#6D28D9] px-5 py-3 font-semibold text-white transition-all hover:bg-[#5b21b6]"
-            >
-              Explore Use Cases
-              <span aria-hidden="true">→</span>
-            </Link>
-          </section>
-        </>
-      )}
+      {isUseCases ? <SolutionsUseCases /> : <SolutionsFor />}
     </main>
   );
 }

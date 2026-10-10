@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Search, ChevronDown } from 'lucide-react';
 import api from '../services/api';
@@ -52,11 +53,7 @@ export default function Support() {
   return (
     <main className="container-x py-16">
       <div className="max-w-3xl">
-        <span className="chip">
-          Support
-        </span>
-
-        <h1 className="mt-5 text-5xl font-extrabold">
+        <h1 className="text-5xl font-extrabold">
           How can we help?
         </h1>
 
