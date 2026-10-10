@@ -23,12 +23,10 @@ const footerColumns = [
   {
     title: 'Resources',
     links: [
-      { label: 'Articles', to: '/blog' },
-      { label: 'Events', to: '/blog' },
-      { label: 'Changelog', to: '/blog' },
-      { label: 'API docs', to: '/support' },
-      { label: 'Help Center', to: '/support' },
-      { label: 'Careers', to: '/jobs' },
+      { label: 'About Us', to: '/blog' },
+      { label: 'Contact Us', to: '/blog' },
+      { label: 'Jobs / Hiring', to: '/blog' },
+      { label: 'Blog / Case Studies', to: '/support' },
     ],
   },
   {

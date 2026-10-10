@@ -133,7 +133,7 @@ export default function Pricing() {
 
           <div className="mt-7">
             <span className="text-5xl font-extrabold">
-              $10
+              $1
             </span>
 
             <span className="text-[#756b86] ml-2">
@@ -162,7 +162,7 @@ export default function Pricing() {
             />
 
             <h2 className="text-2xl font-bold">
-              Agency Cliq
+              Agency / Enterprices Cliq
             </h2>
           </div>
 

@@ -55,7 +55,7 @@ function ProductPage({
         <div className="mt-10 grid md:grid-cols-2 gap-6">
           <div className="card p-7">
             <h2 className="text-2xl font-bold">
-              Challenges
+              Challenge
             </h2>
 
             <p className="mt-3 text-[#756b86] leading-7">
@@ -65,7 +65,7 @@ function ProductPage({
 
           <div className="card p-7">
             <h2 className="text-2xl font-bold">
-              The Gap We Close
+              Gap We Close
             </h2>
 
             <p className="mt-3 text-[#756b86] leading-7">

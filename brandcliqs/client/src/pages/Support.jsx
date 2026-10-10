@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Search, ChevronDown } from 'lucide-react';
+import { Search, ChevronDown, Mail, Phone } from 'lucide-react';
 import api from '../services/api';
 import toast from 'react-hot-toast';
 
@@ -75,10 +75,7 @@ export default function Support() {
 
           <div className="space-y-3 mt-5">
             {faqs.map(([q, a]) => (
-              <details
-                className="card p-5"
-                key={q}
-              >
+              <details className="card p-5" key={q}>
                 <summary className="font-semibold cursor-pointer flex justify-between">
                   {q}
                   <ChevronDown size={18} />
@@ -90,14 +87,36 @@ export default function Support() {
               </details>
             ))}
           </div>
+
+          {/* Contact details outside the message form */}
+          <div className="card p-6 mt-6">
+            <h2 className="text-xl font-bold">
+              Contact support
+            </h2>
+
+            <div className="mt-5 space-y-4">
+              <a
+                href="mailto:brandcliqs@gmail.com"
+                className="flex items-center gap-3 text-[#756b86] hover:text-[#6D28D9] transition-colors"
+              >
+                <Mail size={20} className="text-[#6D28D9] shrink-0" />
+                <span>brandcliqs@gmail.com</span>
+              </a>
+
+              <a
+                href="tel:7975771943"
+                className="flex items-center gap-3 text-[#756b86] hover:text-[#6D28D9] transition-colors"
+              >
+                <Phone size={20} className="text-[#6D28D9] shrink-0" />
+                <span>7975771943</span>
+              </a>
+            </div>
+          </div>
         </div>
 
-        <form
-          onSubmit={submit}
-          className="card p-7"
-        >
+        <form onSubmit={submit} className="card p-7">
           <h2 className="text-xl font-bold">
-            Contact support
+            Send Message
           </h2>
 
           {[
@@ -142,8 +161,8 @@ export default function Support() {
             />
           </label>
 
-          <button className="btn btn-primary w-full mt-5">
-            Send message
+          <button type="submit" className="btn btn-primary w-full mt-5">
+            Send Message
           </button>
         </form>
       </div>

@@ -41,7 +41,7 @@ export default function Navbar() {
     ['About Us', '/about'],
     ['Contact Us', '/support'],
     ['Jobs / Hiring', '/jobs'],
-    ['Blog — BrandCliqs', '/blog'],
+    ['Blog / Case Studies', '/blog'],
   ];
 
   useEffect(() => {
