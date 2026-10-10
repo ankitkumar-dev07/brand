@@ -79,11 +79,7 @@ export default function About() {
       </section>
 
       <section className="py-24 text-center">
-        <span className="chip border-orange-200 text-orange-500 bg-orange-50">
-          Core values
-        </span>
-
-        <h2 className="mt-4 text-4xl font-bold">
+        <h2 className="text-4xl font-bold">
           What we stand for
         </h2>
 
