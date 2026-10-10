@@ -15,7 +15,7 @@ const audienceSolutions = [
     ],
   },
   {
-    title: 'Startups',
+    title: 'Individuals',
     subtitle: 'Launch lean, grow fast',
     description:
       'Get the tools, insights and support you need to build a strong marketing engine without unnecessary complexity.',
@@ -27,7 +27,7 @@ const audienceSolutions = [
     ],
   },
   {
-    title: 'Enterprise',
+    title: 'Enterprise / Agencies',
     subtitle: 'Amplify your mission',
     description:
       'Bring your marketing operations together with powerful analytics, multi-brand visibility and expert support.',
