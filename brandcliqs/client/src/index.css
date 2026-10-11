@@ -71,6 +71,7 @@ body {
 ================================ */
 
 .gradient-text {
+  display: inline;
   background: linear-gradient(
     90deg,
     #6d28d9,
@@ -79,8 +80,10 @@ body {
     #6d28d9
   );
   background-size: 250% 100%;
+  background-position: 0% 50%;
   -webkit-background-clip: text;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
   color: transparent;
   animation: bc-gradient 7s ease-in-out infinite alternate;
 }
@@ -105,7 +108,7 @@ button {
 }
 
 a {
-  transition: color 220ms ease;
+  transition: color 150ms ease;
 }
 
 .btn {
@@ -118,11 +121,11 @@ a {
   font-weight: 600;
   text-decoration: none;
   transition:
-    transform 220ms var(--bc-ease),
-    background-color 250ms ease,
-    border-color 250ms ease,
-    box-shadow 250ms ease,
-    color 220ms ease;
+    transform 150ms var(--bc-ease),
+    background-color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    color 150ms ease;
 }
 
 .btn-primary {
@@ -135,7 +138,7 @@ a {
   color: #fff;
   background: var(--bc-purple-dark);
   transform: translateY(-2px);
-  box-shadow: 0 12px 26px rgba(109, 40, 217, 0.25);
+  box-shadow: 0 10px 22px rgba(109, 40, 217, 0.22);
 }
 
 .btn-outline {
@@ -169,9 +172,9 @@ button:active {
   font-size: 13px;
   font-weight: 600;
   transition:
-    transform 220ms var(--bc-ease),
-    background-color 220ms ease,
-    border-color 220ms ease;
+    transform 150ms var(--bc-ease),
+    background-color 150ms ease,
+    border-color 150ms ease;
 }
 
 .chip:hover {
@@ -191,8 +194,8 @@ button:active {
   outline: none;
   background: #fff;
   transition:
-    border-color 200ms ease,
-    box-shadow 200ms ease;
+    border-color 150ms ease,
+    box-shadow 150ms ease;
 }
 
 .input:focus,
@@ -205,7 +208,7 @@ select:focus {
 }
 
 /* ================================
-   Cards
+   Cards and Hover Interactions
 ================================ */
 
 .card {
@@ -214,19 +217,20 @@ select:focus {
   background: #fff;
   box-shadow: 0 5px 22px rgba(27, 18, 39, 0.045);
   transition:
-    transform 300ms var(--bc-ease),
-    box-shadow 300ms ease,
-    border-color 300ms ease;
+    transform 150ms var(--bc-ease),
+    box-shadow 150ms ease,
+    border-color 150ms ease,
+    background-color 150ms ease;
 }
 
 .card:hover {
   transform: translateY(-4px);
   border-color: rgba(109, 40, 217, 0.24);
-  box-shadow: 0 16px 36px rgba(31, 18, 56, 0.09);
+  box-shadow: 0 12px 30px rgba(31, 18, 56, 0.08);
 }
 
 .card img {
-  transition: transform 500ms var(--bc-ease);
+  transition: transform 180ms var(--bc-ease);
 }
 
 .card:hover img {
@@ -235,16 +239,46 @@ select:focus {
 
 .card svg {
   transition:
-    transform 250ms var(--bc-ease),
-    color 250ms ease;
+    transform 150ms var(--bc-ease),
+    color 150ms ease;
 }
 
 .card:hover svg {
   transform: translateY(-2px);
 }
 
+/* Homepage feature cards */
+
+.feature-hover-card {
+  cursor: default;
+  transition:
+    transform 150ms var(--bc-ease),
+    box-shadow 150ms ease,
+    border-color 120ms ease,
+    background-color 120ms ease;
+}
+
+.feature-hover-card:hover {
+  transform: translateY(-4px);
+  background-color: #faf7ff;
+  border-color: rgba(109, 40, 217, 0.35);
+  box-shadow: 0 12px 30px rgba(109, 40, 217, 0.10);
+}
+
+/* Faster arrow hover */
+.feature-hover-card a,
+.feature-hover-card a svg {
+  transition:
+    color 100ms ease,
+    transform 100ms ease;
+}
+
+.feature-hover-card a:hover svg {
+  transform: translateX(3px);
+}
+
 /* ================================
-   Hero Animations
+   General Entrance Animations
 ================================ */
 
 @keyframes bc-fade-up {
@@ -318,7 +352,6 @@ select:focus {
 
 /* ================================
    Scroll Reveal
-   Activated by the React component
 ================================ */
 
 .bc-reveal {
@@ -335,14 +368,17 @@ select:focus {
   transform: translateY(0);
 }
 
-/* Optional stagger for child cards */
+/* Staggered child animations */
 
 .bc-stagger > * {
   opacity: 0;
   transform: translateY(18px);
   transition:
     opacity 550ms var(--bc-ease),
-    transform 550ms var(--bc-ease);
+    transform 550ms var(--bc-ease),
+    background-color 150ms ease,
+    box-shadow 150ms ease,
+    border-color 120ms ease;
 }
 
 .bc-stagger.bc-reveal-visible > * {
@@ -438,18 +474,307 @@ button:focus-visible {
 }
 
 /* ================================
-   Responsive and Reduced Motion
+   Login and Register Animations
+================================ */
+
+.login-card,
+.register-card {
+  animation: auth-card-enter 650ms cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.login-content {
+  animation: auth-content-enter 700ms 100ms ease-out both;
+}
+
+.login-field {
+  animation: auth-content-enter 650ms 180ms ease-out both;
+}
+
+.login-submit {
+  animation: auth-content-enter 650ms 280ms ease-out both;
+}
+
+@keyframes auth-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes auth-content-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes login-float {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(24px, 18px);
+  }
+}
+
+@keyframes login-float-reverse {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(-22px, -16px);
+  }
+}
+
+.animate-login-float {
+  animation: login-float 9s ease-in-out infinite;
+}
+
+.animate-login-float-reverse {
+  animation: login-float-reverse 11s ease-in-out infinite;
+}
+
+/* ================================
+   Homepage Hero Animations
+================================ */
+
+.home-hero-content {
+  animation: home-hero-enter 800ms cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.home-hero-heading {
+  animation: home-hero-enter 800ms 180ms ease-out both;
+}
+
+.home-hero-description {
+  animation: home-hero-enter 750ms 400ms ease-out both;
+}
+
+.home-hero-actions {
+  animation: home-hero-enter 750ms 520ms ease-out both;
+}
+
+.home-hero-button {
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease,
+    background-color 150ms ease;
+}
+
+.home-hero-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(109, 40, 217, 0.16);
+}
+
+.home-hero-visual {
+  animation: home-hero-enter 900ms 180ms ease-out both;
+}
+
+.home-hero-image {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.home-hero-image:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 65px rgba(55, 20, 90, 0.20);
+}
+
+.home-hero-suggestion {
+  animation: home-hero-enter 700ms 650ms ease-out both;
+}
+
+@keyframes home-hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================================
+   Hero Heading — Complete Text
+   Fix for disappearing "engine."
+================================ */
+
+.hero-heading {
+  display: block;
+  overflow: visible;
+  animation: none;
+}
+
+.hero-line {
+  display: inline;
+  opacity: 1;
+  overflow: visible;
+  clip-path: none;
+  animation: heroTextEnter 800ms ease-out both;
+}
+
+.hero-gradient {
+  display: inline;
+  opacity: 1;
+  overflow: visible;
+  clip-path: none;
+  background-image: linear-gradient(
+    90deg,
+    #6d28d9,
+    #c65bd4,
+    #ff8a00,
+    #6d28d9
+  );
+  background-size: 250% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation:
+    heroTextEnter 800ms 180ms ease-out both,
+    heroGradientFlow 5s ease-in-out 1s infinite alternate;
+}
+
+.hero-description {
+  animation: heroLoadingText 800ms 450ms ease-out both;
+}
+
+.hero-actions {
+  animation: heroLoadingText 700ms 650ms ease-out both;
+}
+
+@keyframes heroTextEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroGradientFlow {
+  from {
+    background-position: 0% 50%;
+  }
+
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes heroLoadingText {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* ================================
+   Scroll-responsive floating navbar
+================================ */
+
+.navbar-shell {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  margin-inline: auto;
+  border-radius: 0;
+  transition:
+    width 450ms cubic-bezier(0.22, 1, 0.36, 1),
+    margin 450ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-radius 350ms ease,
+    box-shadow 350ms ease,
+    background-color 350ms ease;
+}
+
+.navbar-shell-scrolled {
+  width: calc(100% - 48px);
+  max-width: 1440px;
+  margin-top: 10px;
+  border-radius: 22px;
+  box-shadow: 0 12px 38px rgba(35, 12, 58, 0.18);
+}
+
+.navbar-mobile-menu {
+  animation: navbar-menu-enter 250ms ease-out both;
+}
+
+@keyframes navbar-menu-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================================
+   Responsive
 ================================ */
 
 @media (max-width: 640px) {
   .container-x {
-    width: min(100% - 32px, 1180px);
+    width: min(calc(100% - 32px), 1180px);
   }
 
   .card:hover {
     transform: translateY(-2px);
   }
+
+  .hero-heading,
+  .hero-line,
+  .hero-gradient {
+    overflow: visible;
+    clip-path: none;
+  }
+
+  .hero-line,
+  .hero-gradient {
+    white-space: normal;
+  }
+
+  .navbar-shell-scrolled {
+    width: calc(100% - 20px);
+    margin-top: 8px;
+    border-radius: 18px;
+  }
 }
+
+/* ================================
+   Reduced Motion Accessibility
+================================ */
 
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -477,7 +802,275 @@ button:focus-visible {
 
   .card:hover,
   .btn:hover,
-  .chip:hover {
+  .chip:hover,
+  .feature-hover-card:hover {
     transform: none;
+  }
+
+  .login-card,
+  .login-content,
+  .login-field,
+  .login-submit,
+  .register-card,
+  .animate-login-float,
+  .animate-login-float-reverse,
+  .home-hero-content,
+  .home-hero-heading,
+  .home-hero-description,
+  .home-hero-actions,
+  .home-hero-visual,
+  .home-hero-suggestion,
+  .hero-heading,
+  .hero-line,
+  .hero-gradient,
+  .hero-description,
+  .hero-actions {
+    animation: none !important;
+    opacity: 1 !important;
+    clip-path: none !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  .home-hero-button,
+  .home-hero-image {
+    transition: none !important;
+  }
+
+  .navbar-shell,
+  .navbar-mobile-menu {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* =========================================
+   BrandCliqs — Whole Homepage Text Loading
+========================================= */
+
+.home-page .bc-reveal.bc-reveal-visible h1,
+.home-page .bc-reveal.bc-reveal-visible h2,
+.home-page .bc-reveal.bc-reveal-visible h3,
+.home-page .bc-reveal.bc-reveal-visible p,
+.home-page .bc-reveal.bc-reveal-visible .chip {
+  animation: bc-text-loading 550ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Stagger text inside feature, agency and tool cards */
+.home-page .bc-stagger.bc-reveal-visible > * h3 {
+  animation: bc-text-loading 400ms 100ms ease-out both;
+}
+
+.home-page .bc-stagger.bc-reveal-visible > * p {
+  animation: bc-text-loading 450ms 160ms ease-out both;
+}
+
+.home-page .bc-stagger.bc-reveal-visible > * a {
+  animation: bc-text-loading 400ms 220ms ease-out both;
+}
+
+/* Smooth loading effect */
+@keyframes bc-text-loading {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(3px);
+  }
+
+  70% {
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Keep the complete hero heading visible */
+.home-page .hero-line,
+.home-page .hero-gradient {
+  visibility: visible;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .home-page .bc-reveal.bc-reveal-visible h1,
+  .home-page .bc-reveal.bc-reveal-visible h2,
+  .home-page .bc-reveal.bc-reveal-visible h3,
+  .home-page .bc-reveal.bc-reveal-visible p,
+  .home-page .bc-reveal.bc-reveal-visible .chip,
+  .home-page .bc-stagger.bc-reveal-visible > * h3,
+  .home-page .bc-stagger.bc-reveal-visible > * p,
+  .home-page .bc-stagger.bc-reveal-visible > * a {
+    animation: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+}
+
+/* BrandCliqs: visible scroll text animation */
+
+.bc-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(4px);
+
+  transition:
+    opacity 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 650ms ease;
+
+  transition-delay: var(--bc-reveal-delay, 0ms);
+}
+
+.bc-reveal.bc-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Cards appear one after another */
+.bc-stagger > * {
+  opacity: 0;
+  transform: translateY(22px);
+  filter: blur(3px);
+
+  transition:
+    opacity 450ms ease,
+    transform 450ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 450ms ease,
+    background-color 120ms ease,
+    border-color 120ms ease,
+    box-shadow 150ms ease;
+}
+
+.bc-stagger.bc-reveal-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.bc-stagger.bc-reveal-visible > *:nth-child(1) {
+  transition-delay: 50ms;
+}
+
+.bc-stagger.bc-reveal-visible > *:nth-child(2) {
+  transition-delay: 120ms;
+}
+
+.bc-stagger.bc-reveal-visible > *:nth-child(3) {
+  transition-delay: 190ms;
+}
+
+.bc-stagger.bc-reveal-visible > *:nth-child(4) {
+  transition-delay: 260ms;
+}
+
+.bc-stagger.bc-reveal-visible > *:nth-child(5) {
+  transition-delay: 330ms;
+}
+
+.bc-stagger.bc-reveal-visible > *:nth-child(6) {
+  transition-delay: 400ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bc-reveal,
+  .bc-reveal.bc-reveal-visible,
+  .bc-stagger > *,
+  .bc-stagger.bc-reveal-visible > * {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}
+
+.explore-page-visible .explore-heading {
+  animation: test-heading 1.2s ease both !important;
+}
+
+@keyframes test-heading {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+    filter: blur(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+
+.about-page {
+  --about-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.about-interactive-card {
+  isolation: isolate;
+  cursor: default;
+  border-color: #e8e3ed;
+  box-shadow: 0 5px 22px rgba(27, 18, 39, 0.045);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
+}
+
+.about-interactive-card:hover {
+  border-color: #6d28d9;
+  box-shadow: 0 24px 60px rgba(109, 40, 217, 0.18);
+}
+
+.about-card-light {
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(109, 40, 217, 0.09),
+    transparent 68%
+  );
+}
+
+.about-intro-accent {
+  transform-origin: left;
+  animation: about-accent-enter 800ms 300ms var(--about-ease) both;
+}
+
+@keyframes about-accent-enter {
+  from {
+    opacity: 0;
+    transform: scaleX(0.2);
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 640px) {
+  .about-page {
+    padding-top: 28px;
+  }
+
+  .about-page .py-24 {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-intro-accent {
+    animation: none !important;
+  }
+
+  .about-interactive-card,
+  .about-interactive-card * {
+    transition-duration: 0.01ms !important;
   }
 }
