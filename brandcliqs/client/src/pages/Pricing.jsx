@@ -1,6 +1,6 @@
 import { Check, Sparkles, Building2, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import {
   motion,
   MotionConfig,
@@ -90,9 +90,12 @@ function FeatureList({ features }) {
         <motion.li
           key={feature}
           variants={listItem}
-          className="flex items-center gap-2 text-[#51485e]"
+          className="flex items-center gap-2 text-[#51485e] transition-colors duration-300 group-hover:text-white"
         >
-          <Check className="shrink-0 text-emerald-500" size={18} />
+          <Check
+            className="shrink-0 text-emerald-500 transition-colors duration-300 group-hover:text-emerald-300"
+            size={18}
+          />
           {feature}
         </motion.li>
       ))}
@@ -119,6 +122,79 @@ function Price({ children, className = 'text-5xl' }) {
         {children}
       </motion.span>
     </span>
+  );
+}
+
+/* Plan card: purple fill on hover, cursor light, click ripple */
+function PlanCard({ className = '', badge, children }) {
+  const [ripples, setRipples] = useState([]);
+
+  const move = (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`);
+    e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`);
+  };
+
+  const ripple = (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    const id = Date.now() + Math.random();
+    const size = Math.max(r.width, r.height) * 2;
+
+    setRipples((prev) => [
+      ...prev,
+      { id, x: e.clientX - r.left, y: e.clientY - r.top, size },
+    ]);
+
+    setTimeout(
+      () => setRipples((prev) => prev.filter((rp) => rp.id !== id)),
+      850
+    );
+  };
+
+  return (
+    <div
+      onMouseMove={move}
+      onClick={ripple}
+      className={`card group relative flex flex-1 flex-col overflow-hidden p-7 transition-[border-color,box-shadow] duration-300 hover:border-[#6D28D9] hover:shadow-[0_24px_60px_rgba(109,40,217,.35)] ${className}`}
+    >
+      {/* purple fill on hover */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#5b21b6] via-[#6D28D9] to-[#a855f7] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+      />
+
+      {/* light that follows the cursor */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background:
+            'radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.22), transparent 65%)',
+        }}
+      />
+
+      {/* click ripples */}
+      {ripples.map((rp) => (
+        <motion.span
+          key={rp.id}
+          aria-hidden
+          className="pointer-events-none absolute rounded-full bg-white/30"
+          style={{
+            left: rp.x - rp.size / 2,
+            top: rp.y - rp.size / 2,
+            width: rp.size,
+            height: rp.size,
+          }}
+          initial={{ scale: 0, opacity: 0.8 }}
+          animate={{ scale: 1, opacity: 0 }}
+          transition={{ duration: 0.85, ease: 'easeOut' }}
+        />
+      ))}
+
+      {badge && <div className="absolute right-5 top-5 z-10">{badge}</div>}
+
+      <div className="relative flex flex-1 flex-col">{children}</div>
+    </div>
   );
 }
 
@@ -211,31 +287,37 @@ export default function Pricing() {
           viewport={{ once: true, amount: 0.15 }}
         >
           {/* FREE */}
-          <motion.div variants={fadeUp} whileHover={hoverLift} className="flex">
-            <div className="card flex flex-1 flex-col p-7">
-              <h2 className="text-2xl font-bold">Free Cliq</h2>
+          <motion.div
+            variants={fadeUp}
+            whileHover={hoverLift}
+            whileTap={{ scale: 0.98 }}
+            className="flex"
+          >
+            <PlanCard>
+              <h2 className="text-2xl font-bold transition-colors duration-300 group-hover:text-white">Free Cliq</h2>
 
-              <p className="mt-2 text-[#756b86]">
+              <p className="mt-2 text-[#756b86] transition-colors duration-300 group-hover:text-white/80">
                 Start exploring BrandCliqs.
               </p>
 
-              <div className="mt-7">
+              <div className="mt-7 transition-colors duration-300 group-hover:text-white">
                 <Price>$0</Price>
-                <span className="ml-2 text-[#756b86]">/ month</span>
+                <span className="ml-2 text-[#756b86] transition-colors duration-300 group-hover:text-white/70">/ month</span>
               </div>
 
               <FeatureList features={freeFeatures} />
 
-              <Link to="/register" className="btn btn-outline mt-9 w-full">
+              <Link to="/register" className="btn btn-outline w-full transition-colors duration-300 group-hover:border-white group-hover:bg-white group-hover:text-[#6D28D9] mt-9">
                 Start Free
               </Link>
-            </div>
+            </PlanCard>
           </motion.div>
 
           {/* PRO */}
           <motion.div
             variants={fadeUp}
             whileHover={hoverLift}
+            whileTap={{ scale: 0.98 }}
             className="relative flex"
           >
             {/* pulsing glow behind the popular plan */}
@@ -252,10 +334,11 @@ export default function Pricing() {
               }}
             />
 
-            <div className="card relative flex flex-1 flex-col border-[#d8c6ff] p-7 shadow-[0_20px_60px_rgba(109,40,217,.12)]">
-              <div className="absolute right-5 top-5">
+            <PlanCard
+              className="relative border-[#d8c6ff] shadow-[0_20px_60px_rgba(109,40,217,.12)]"
+              badge={
                 <motion.span
-                  className="chip border-[#6D28D9] bg-[#6D28D9] text-white"
+                  className="chip border-[#6D28D9] bg-[#6D28D9] text-white transition-colors duration-300 group-hover:border-white group-hover:bg-white group-hover:text-[#6D28D9]"
                   initial={{ scale: 0, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
                   viewport={{ once: true }}
@@ -269,17 +352,17 @@ export default function Pricing() {
                   <Sparkles size={14} />
                   Popular
                 </motion.span>
-              </div>
+              }
+            >
+              <h2 className="text-2xl font-bold transition-colors duration-300 group-hover:text-white">Pro Cliq</h2>
 
-              <h2 className="text-2xl font-bold">Pro Cliq</h2>
-
-              <p className="mt-2 text-[#756b86]">
+              <p className="mt-2 text-[#756b86] transition-colors duration-300 group-hover:text-white/80">
                 For growing marketers and teams.
               </p>
 
-              <div className="mt-7">
+              <div className="mt-7 transition-colors duration-300 group-hover:text-white">
                 <Price>$1</Price>
-                <span className="ml-2 text-[#756b86]">/ month</span>
+                <span className="ml-2 text-[#756b86] transition-colors duration-300 group-hover:text-white/70">/ month</span>
               </div>
 
               <FeatureList features={proFeatures} />
@@ -287,54 +370,65 @@ export default function Pricing() {
               <motion.button
                 onClick={upgrade}
                 whileTap={{ scale: 0.97 }}
-                className="btn btn-primary mt-9 w-full"
+                className="btn btn-primary mt-9 w-full transition-colors duration-300 group-hover:bg-none group-hover:bg-white group-hover:text-[#6D28D9]"
               >
                 {user?.plan === 'pro'
                   ? 'Current Pro Plan'
                   : 'Upgrade to Pro'}
               </motion.button>
-            </div>
+            </PlanCard>
           </motion.div>
 
           {/* AGENCY */}
-          <motion.div variants={fadeUp} whileHover={hoverLift} className="flex">
-            <div className="card flex flex-1 flex-col border-[#eadcff] p-7">
+          <motion.div
+            variants={fadeUp}
+            whileHover={hoverLift}
+            whileTap={{ scale: 0.98 }}
+            className="flex"
+          >
+            <PlanCard className="border-[#eadcff]">
               <div className="flex items-center gap-2">
-                <Building2 size={22} className="text-[#6D28D9]" />
+                <Building2
+                  size={22}
+                  className="text-[#6D28D9] transition-colors duration-300 group-hover:text-white"
+                />
 
-                <h2 className="text-2xl font-bold">
+                <h2 className="text-2xl font-bold transition-colors duration-300 group-hover:text-white">
                   Agency / Enterprices Cliq
                 </h2>
               </div>
 
-              <p className="mt-2 text-[#756b86]">
+              <p className="mt-2 text-[#756b86] transition-colors duration-300 group-hover:text-white/80">
                 Built for agencies and teams managing multiple clients.
               </p>
 
-              <div className="mt-7">
+              <div className="mt-7 transition-colors duration-300 group-hover:text-white">
                 <Price className="text-4xl">Custom</Price>
               </div>
 
               <FeatureList features={agencyFeatures} />
 
-              <div className="mt-6 rounded-xl bg-[#f8f5fb] p-4">
+              <div className="mt-6 rounded-xl bg-[#f8f5fb] p-4 transition-colors duration-300 group-hover:bg-white/15">
                 <div className="flex items-center gap-2">
-                  <Users size={18} className="text-[#6D28D9]" />
+                  <Users
+                    size={18}
+                    className="text-[#6D28D9] transition-colors duration-300 group-hover:text-white"
+                  />
 
-                  <span className="font-semibold">
+                  <span className="font-semibold transition-colors duration-300 group-hover:text-white">
                     Multiple user access
                   </span>
                 </div>
 
-                <p className="mt-2 text-sm text-[#756b86]">
+                <p className="mt-2 text-sm text-[#756b86] transition-colors duration-300 group-hover:text-white/80">
                   Add multiple team members under one Agency Cliq account.
                 </p>
               </div>
 
-              <Link to="/support" className="btn btn-outline mt-7 w-full">
+              <Link to="/support" className="btn btn-outline w-full transition-colors duration-300 group-hover:border-white group-hover:bg-white group-hover:text-[#6D28D9] mt-7">
                 Contact Us
               </Link>
-            </div>
+            </PlanCard>
           </motion.div>
         </motion.section>
 

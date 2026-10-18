@@ -1,4 +1,3 @@
-
 import { Link, useLocation } from 'react-router-dom';
 import {
   Menu,
@@ -176,6 +175,11 @@ export default function Navbar() {
   const mobileSectionTitleClass =
     'mb-2 text-xs font-semibold uppercase tracking-widest text-[#a99bb9]';
 
+  // Pricing has no sub-links, so it is a section label that is also a link.
+  // Same size, colour and letter-spacing as PRODUCTS / SOLUTIONS / RESOURCES.
+  const mobilePricingClass =
+    'block py-1.5 text-sm font-semibold uppercase tracking-widest text-[#d7cfe0] transition-colors duration-150 hover:text-white';
+
   return (
     <header
       className="navbar-shell sticky top-0 z-50 mx-auto"
@@ -319,7 +323,7 @@ export default function Navbar() {
               <Link
                 to="/pricing"
                 onClick={closeMobileMenu}
-                className={mobileLinkClass}
+                className={mobilePricingClass}
               >
                 Pricing
               </Link>
