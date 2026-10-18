@@ -1293,3 +1293,13 @@ body {
 :root.dark {
   scrollbar-color: #3a2c4a var(--d-bg);
 }
+
+/* ---------- Footer headings (Products / Solutions / Resources / Legal) ---------- */
+
+:where(.dark) footer :is(h1, h2, h3, h4, h5, h6, strong, b, th, [class*="font-semibold"], [class*="font-bold"], [class*="font-extrabold"]) {
+  color: var(--d-text) !important;
+}
+
+:where(.dark) footer a:hover {
+  color: #d8c6ff !important;
+}
