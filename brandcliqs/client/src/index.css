@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
@@ -1073,4 +1072,224 @@ button:focus-visible {
   .about-interactive-card * {
     transition-duration: 0.01ms !important;
   }
+}
+
+
+/* =====================================================
+   BrandCliqs — DARK MODE
+   Paste this block at the VERY END of src/index.css
+
+   The navbar toggle adds the class "dark" to <html>.
+   Your pages use fixed colours (bg-white, text-[#171322]...),
+   so these rules re-colour them whenever <html class="dark">.
+
+   :where(.dark) has zero specificity, so hover / group-hover
+   styles (purple card fill, white text on hover) still win.
+===================================================== */
+
+:root.dark {
+  color-scheme: dark;
+
+  --d-bg: #130f1b;
+  --d-surface: #1b1425;
+  --d-surface-2: #251b33;
+  --d-border: #33273f;
+  --d-text: #f3eef9;
+  --d-muted: #a99bb9;
+  --d-muted-2: #8f82a1;
+  --d-accent: #b69cff;
+
+  color: var(--d-text);
+  background: var(--d-bg);
+}
+
+body {
+  transition: background-color 300ms ease, color 300ms ease;
+}
+
+:root.dark body {
+  background: var(--d-bg);
+  color: var(--d-text);
+}
+
+/* ---------- Page text ---------- */
+
+:where(.dark) [class~="text-[#171322]"],
+:where(.dark) [class~="text-[#292333]"] {
+  color: var(--d-text);
+}
+
+:where(.dark) main [class~="text-[#21172b]"] {
+  color: var(--d-text);
+}
+
+:where(.dark) [class~="text-[#51485e]"],
+:where(.dark) [class~="text-[#5f556d]"],
+:where(.dark) [class~="text-[#756b86]"] {
+  color: var(--d-muted);
+}
+
+:where(.dark) [class~="text-[#8a8094]"],
+:where(.dark) [class~="text-[#9a8eaa]"] {
+  color: var(--d-muted-2);
+}
+
+/* purple accent text becomes a lighter purple so it stays readable */
+:where(.dark) [class~="text-[#6D28D9]"],
+:where(.dark) [class~="text-[#6d28d9]"],
+:where(.dark) [class~="text-[#5b21b6]"] {
+  color: var(--d-accent);
+}
+
+/* ---------- Surfaces ---------- */
+
+:where(.dark) [class~="bg-white"],
+:where(.dark) [class~="bg-[#fcfaff]"],
+:where(.dark) [class~="bg-[#faf7ff]"],
+:where(.dark) [class~="bg-[#f8f5ff]"] {
+  background-color: var(--d-surface);
+}
+
+:where(.dark) [class~="bg-white/90"],
+:where(.dark) [class~="bg-white/95"] {
+  background-color: rgba(27, 20, 37, 0.92);
+}
+
+:where(.dark) [class~="bg-[#fcfaff]"] {
+  background-color: var(--d-bg);
+}
+
+:where(.dark) [class~="bg-[#f8f5fb]"],
+:where(.dark) [class~="bg-[#f3eefe]"] {
+  background-color: var(--d-surface-2);
+}
+
+/* icon boxes */
+:where(.dark) [class~="bg-[#f3e8ff]"] {
+  background-color: rgba(139, 92, 246, 0.2);
+}
+
+/* hover backgrounds that were light */
+:where(.dark) [class~="hover:bg-[#faf7ff]"]:hover,
+:where(.dark) [class~="hover:bg-[#f8f5ff]"]:hover,
+:where(.dark) [class~="hover:bg-[#f3e8ff]"]:hover,
+:where(.dark) [class~="hover:bg-purple-50"]:hover {
+  background-color: var(--d-surface-2);
+}
+
+/* white buttons on dark purple blocks (CTA) stay white */
+:where(.dark) .btn[class~="bg-white"] {
+  background-color: #fff;
+}
+
+/* the navbar keeps its own colours (sun / moon toggle etc.) */
+:where(.dark) header [class~="bg-white"] {
+  background-color: #fff;
+}
+
+/* ---------- Borders ---------- */
+
+:where(.dark) [class~="border-[#eee9f2]"],
+:where(.dark) [class~="border-[#e8e3ed]"],
+:where(.dark) [class~="border-[#e8e0f0]"],
+:where(.dark) [class~="border-[#e5deed]"],
+:where(.dark) [class~="border-[#e6e0ee]"],
+:where(.dark) [class~="border-[#e6d9f8]"],
+:where(.dark) [class~="border-[#e8def8]"],
+:where(.dark) [class~="border-[#eee8f4]"],
+:where(.dark) [class~="border-[#eadcff]"],
+:where(.dark) [class~="border-[#d8c6ff]"],
+:where(.dark) [class~="border-purple-100"],
+:where(.dark) [class~="border-white/80"] {
+  border-color: var(--d-border);
+}
+
+/* ---------- Your own CSS classes ---------- */
+
+:where(.dark) .card {
+  background-color: var(--d-surface);
+  border-color: var(--d-border);
+  box-shadow: 0 5px 22px rgba(0, 0, 0, 0.35);
+}
+
+:where(.dark) .card:hover {
+  border-color: rgba(167, 139, 250, 0.45);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+}
+
+:where(.dark) .btn-outline {
+  background: var(--d-surface);
+  border-color: var(--d-border);
+  color: var(--d-text);
+}
+
+:where(.dark) .btn-outline:hover {
+  background: var(--d-surface-2);
+  border-color: rgba(167, 139, 250, 0.5);
+}
+
+:where(.dark) .chip {
+  background: rgba(139, 92, 246, 0.16);
+  border-color: rgba(167, 139, 250, 0.3);
+  color: #d8c6ff;
+}
+
+:where(.dark) .input,
+:where(.dark) input,
+:where(.dark) textarea,
+:where(.dark) select {
+  background-color: var(--d-surface);
+  border-color: var(--d-border);
+  color: var(--d-text);
+}
+
+:where(.dark) input::placeholder,
+:where(.dark) textarea::placeholder {
+  color: var(--d-muted-2);
+}
+
+:where(.dark) .input:focus,
+:where(.dark) input:focus,
+:where(.dark) textarea:focus,
+:where(.dark) select:focus {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.28);
+}
+
+:where(.dark) .glass {
+  background: rgba(27, 20, 37, 0.78);
+}
+
+:where(.dark) .soft-grid {
+  background-image:
+    linear-gradient(rgba(167, 139, 250, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(167, 139, 250, 0.06) 1px, transparent 1px);
+}
+
+:where(.dark) .feature-hover-card:hover {
+  background-color: var(--d-surface-2);
+}
+
+/* ---------- Logo marquee edge fades ---------- */
+
+:where(.dark) .logo-marquee .bg-gradient-to-r.from-white {
+  background-image: linear-gradient(to right, var(--d-bg), transparent);
+}
+
+:where(.dark) .logo-marquee .bg-gradient-to-l.from-white {
+  background-image: linear-gradient(to left, var(--d-bg), transparent);
+}
+
+/* ---------- Footer (pastel gradient -> dark) ---------- */
+
+:where(.dark) footer {
+  background-image: none !important;
+  background-color: #0f0b16 !important;
+  border-color: var(--d-border) !important;
+}
+
+/* ---------- Scrollbar ---------- */
+
+:root.dark {
+  scrollbar-color: #3a2c4a var(--d-bg);
 }
