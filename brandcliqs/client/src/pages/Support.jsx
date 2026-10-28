@@ -1,17 +1,21 @@
 
 import { useState } from 'react';
+
 import {
   Search,
   ChevronDown,
   Mail,
   Phone,
+  MapPin,
   ArrowUpRight,
 } from 'lucide-react';
+
 import {
   motion,
   MotionConfig,
   useReducedMotion,
 } from 'framer-motion';
+
 import api from '../services/api';
 import toast from 'react-hot-toast';
 
@@ -121,7 +125,7 @@ function InteractiveCard({
       aria-label={label}
       className={`card group relative isolate overflow-hidden border p-6 transition-[border-color,box-shadow] duration-300 hover:border-[#6D28D9] hover:shadow-[0_24px_60px_rgba(109,40,217,.35)] ${className}`}
     >
-      {/* Purple gradient — same style as Home.jsx */}
+      {/* Purple gradient */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-br from-[#5b21b6] via-[#6D28D9] to-[#a855f7] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
@@ -174,8 +178,6 @@ export default function Support() {
 
   const [search, setSearch] = useState('');
 
-  const reduce = useReducedMotion();
-
   const filteredFaqs = faqs.filter(([question, answer]) =>
     `${question} ${answer}`.toLowerCase().includes(search.toLowerCase()),
   );
@@ -202,7 +204,7 @@ export default function Support() {
   return (
     <MotionConfig reducedMotion="user">
       <main className="container-x overflow-x-clip py-16">
-        {/* Heading entrance animation */}
+        {/* Heading */}
         <motion.div
           className="max-w-3xl"
           variants={stagger(0.12)}
@@ -301,6 +303,7 @@ export default function Support() {
                 </h2>
 
                 <div className="mt-5 space-y-4">
+                  {/* Email */}
                   <a
                     href="mailto:brandcliqs@gmail.com"
                     className="flex items-center gap-3 text-[#756b86] transition-colors hover:text-[#6D28D9] group-hover:text-white/85"
@@ -312,6 +315,7 @@ export default function Support() {
                     <span>brandcliqs@gmail.com</span>
                   </a>
 
+                  {/* Phone */}
                   <a
                     href="tel:7975771943"
                     className="flex items-center gap-3 text-[#756b86] transition-colors hover:text-[#6D28D9] group-hover:text-white/85"
@@ -321,6 +325,26 @@ export default function Support() {
                       className="shrink-0 text-[#6D28D9] transition-colors group-hover:text-white"
                     />
                     <span>7975771943</span>
+                  </a>
+
+                  {/* Address */}
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=Richmond%2C%20Virginia%2C%20United%20States%2023173"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-3 text-[#756b86] transition-colors hover:text-[#6D28D9] group-hover:text-white/85"
+                  >
+                    <MapPin
+                      size={20}
+                      className="mt-0.5 shrink-0 text-[#6D28D9] transition-colors group-hover:text-white"
+                    />
+
+                    <span>
+                      Richmond, Virginia, United States 23173
+                      <span className="mt-1 block text-sm opacity-75">
+                        View on Google Maps
+                      </span>
+                    </span>
                   </a>
                 </div>
               </InteractiveCard>
@@ -390,6 +414,7 @@ export default function Support() {
                   className="btn btn-primary group/button mt-5 flex w-full items-center justify-center gap-2"
                 >
                   Send Message
+
                   <ArrowUpRight
                     size={17}
                     className="transition-transform duration-300 group-hover/button:-translate-y-0.5 group-hover/button:translate-x-0.5"
