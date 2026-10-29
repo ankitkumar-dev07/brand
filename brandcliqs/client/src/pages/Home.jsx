@@ -150,9 +150,7 @@ const hoverLift = {
   transition: { type: 'spring', stiffness: 300, damping: 20 },
 };
 
-/* Word-by-word masked reveal.
-   The PARENT heading (a motion.h1 / motion.h2) triggers it, so nothing
-   depends on observing a clipped element. */
+/* Word-by-word masked reveal */
 const wordVariant = {
   hidden: { y: '110%' },
   show: { y: 0, transition: { duration: 0.7, ease: EASE } },
@@ -213,8 +211,7 @@ function Magnetic({ children }) {
   );
 }
 
-/* Shared interactive card: purple fill on hover, cursor light,
-   click ripple, then navigates to `to` */
+/* Shared interactive card */
 function InteractiveCard({ to, label, cornerArrow = true, children }) {
   const navigate = useNavigate();
   const [ripples, setRipples] = useState([]);
@@ -232,10 +229,12 @@ function InteractiveCard({ to, label, cornerArrow = true, children }) {
     const y = e.clientY !== undefined ? e.clientY - r.top : r.height / 2;
 
     setRipples((prev) => [...prev, { id, x, y }]);
+
     setTimeout(
       () => setRipples((prev) => prev.filter((rp) => rp.id !== id)),
       800
     );
+
     setTimeout(() => navigate(to), 380);
   };
 
@@ -259,13 +258,11 @@ function InteractiveCard({ to, label, cornerArrow = true, children }) {
       aria-label={label}
       className="card group relative cursor-pointer overflow-hidden p-6 outline-none transition-[border-color,box-shadow] duration-300 hover:border-[#6D28D9] hover:shadow-[0_24px_60px_rgba(109,40,217,.35)] focus-visible:ring-2 focus-visible:ring-[#6D28D9]/60"
     >
-      {/* purple fill on hover */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#5b21b6] via-[#6D28D9] to-[#a855f7] opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100"
       />
 
-      {/* light that follows the cursor */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -275,7 +272,6 @@ function InteractiveCard({ to, label, cornerArrow = true, children }) {
         }}
       />
 
-      {/* click ripples */}
       {ripples.map((rp) => (
         <motion.span
           key={rp.id}
@@ -383,21 +379,21 @@ export default function Home() {
   const [tools, setTools] = useState([]);
   const reduce = useReducedMotion();
 
-  /* scroll progress bar */
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, {
     stiffness: 120,
     damping: 30,
   });
 
-  /* hero 3D tilt */
   const tiltRef = useRef(null);
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
+
   const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [7, -7]), {
     stiffness: 120,
     damping: 18,
   });
+
   const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-9, 9]), {
     stiffness: 120,
     damping: 18,
@@ -457,7 +453,11 @@ export default function Home() {
             >
               <Words text="Amplify your" />
               <Words
-                text="marketing engine."
+                text="marketing engine"
+                wordClassName="hero-gradient gradient-text"
+              />
+              <Words
+                text="@ $1"
                 wordClassName="hero-gradient gradient-text"
               />
             </motion.h1>
@@ -507,7 +507,6 @@ export default function Home() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, ease: EASE, delay: 0.3 }}
           >
-            {/* soft glow behind the mockup */}
             <motion.div
               aria-hidden
               className="pointer-events-none absolute -inset-10 rounded-full bg-[#7c3aed]/15 blur-3xl"
@@ -547,7 +546,6 @@ export default function Home() {
                 />
               </motion.div>
 
-              {/* floating suggestion card (pops out in 3D) */}
               <motion.div
                 style={{ z: 60 }}
                 animate={reduce ? {} : { y: [0, 8, 0] }}
@@ -647,7 +645,6 @@ export default function Home() {
 
             <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-white to-transparent md:w-20" />
 
-            {/* pauses when you hover over it */}
             <div className="animate-logo-marquee flex w-max hover:[animation-play-state:paused]">
               {[0, 1].map((group) => (
                 <div
@@ -799,7 +796,6 @@ export default function Home() {
             transition={{ duration: 0.9, ease: EASE }}
             className="relative overflow-hidden rounded-[28px] bg-[#210846] p-8 text-white transition-shadow duration-300 hover:shadow-[0_25px_70px_rgba(55,20,90,.20)] md:p-12"
           >
-            {/* drifting glow blobs */}
             <motion.div
               aria-hidden
               className="pointer-events-none absolute -right-20 -top-24 h-80 w-80 rounded-full bg-[#7c3aed]/40 blur-3xl"
@@ -810,6 +806,7 @@ export default function Home() {
                 ease: 'easeInOut',
               }}
             />
+
             <motion.div
               aria-hidden
               className="pointer-events-none absolute -bottom-28 right-1/4 h-72 w-72 rounded-full bg-[#f97316]/20 blur-3xl"
