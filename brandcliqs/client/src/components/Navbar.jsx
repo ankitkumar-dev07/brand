@@ -1,4 +1,6 @@
+
 import { Link, useLocation } from 'react-router-dom';
+
 import {
   Menu,
   X,
@@ -6,11 +8,12 @@ import {
   Sun,
   Moon,
 } from 'lucide-react';
+
 import { useEffect, useState } from 'react';
 
 import brandLogo from '../assets/logo.jpg';
 
-const Features = [
+const products = [
   ['Tool Marketplace', '/products/tool-marketplace'],
   ['Growth Analytics', '/products/growth-analytics'],
   ['Agency Cliq', '/products/agency-cliq'],
@@ -65,6 +68,7 @@ function Dropdown({ label, items, onNavigate, compact }) {
         aria-expanded={open}
       >
         {label}
+
         <ChevronDown
           size={16}
           className={`transition-transform duration-150 ${
@@ -100,14 +104,16 @@ export default function Navbar() {
   const location = useLocation();
 
   const [mobileOpen, setMobileOpen] = useState(false);
+
   const [darkMode, setDarkMode] = useState(
     () => localStorage.getItem('theme') === 'dark'
   );
+
   const [scrollProgress, setScrollProgress] = useState(0);
 
   const compact = scrollProgress > 0.05;
 
-  // Compact navbar smoothly while scrolling
+  // Compact navbar smoothly while scrolling.
   useEffect(() => {
     let frameId = null;
 
@@ -142,12 +148,12 @@ export default function Navbar() {
     };
   }, []);
 
-  // Close mobile menu after route changes
+  // Close mobile menu after route changes.
   useEffect(() => {
     setMobileOpen(false);
   }, [location.pathname]);
 
-  // Preserve theme preference
+  // Preserve theme preference.
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode);
     localStorage.setItem('theme', darkMode ? 'dark' : 'light');
@@ -175,8 +181,6 @@ export default function Navbar() {
   const mobileSectionTitleClass =
     'mb-2 text-xs font-semibold uppercase tracking-widest text-[#a99bb9]';
 
-  // Pricing has no sub-links, so it is a section label that is also a link.
-  // Same size, colour and letter-spacing as PRODUCTS / SOLUTIONS / RESOURCES.
   const mobilePricingClass =
     'block py-1.5 text-sm font-semibold uppercase tracking-widest text-[#d7cfe0] transition-colors duration-150 hover:text-white';
 
@@ -186,6 +190,7 @@ export default function Navbar() {
       style={navbarStyle}
     >
       <nav className="relative flex h-full items-center justify-between gap-3 rounded-[inherit] border border-white/10 bg-[#21172b]/95 px-4 backdrop-blur-xl sm:gap-4 sm:px-6 md:px-8 lg:px-10">
+
         {/* Brand logo */}
         <Logo compact={compact} />
 
@@ -196,7 +201,7 @@ export default function Navbar() {
           }`}
         >
           <Dropdown
-            label="Products"
+            label="Features"
             items={products}
             compact={compact}
           />
@@ -270,7 +275,9 @@ export default function Navbar() {
           <Link
             to="/register"
             className={`whitespace-nowrap rounded-2xl bg-[#7029e5] font-semibold text-white transition-all duration-150 hover:bg-[#812ff5] ${
-              compact ? 'px-4 py-2.5 text-sm' : 'px-4 py-3 text-sm xl:px-5'
+              compact
+                ? 'px-4 py-2.5 text-sm'
+                : 'px-4 py-3 text-sm xl:px-5'
             }`}
           >
             Sign up
@@ -292,8 +299,10 @@ export default function Navbar() {
         {mobileOpen && (
           <div className="navbar-mobile-menu absolute left-0 right-0 top-full z-[60] mt-3 max-h-[80vh] overflow-y-auto rounded-2xl border border-white/10 bg-[#21172b] p-5 shadow-2xl lg:hidden">
             <div className="flex flex-col gap-5">
+
               <div>
-                <p className={mobileSectionTitleClass}>Products</p>
+                <p className={mobileSectionTitleClass}>Features</p>
+
                 {products.map(([name, path]) => (
                   <Link
                     key={path}
@@ -308,6 +317,7 @@ export default function Navbar() {
 
               <div>
                 <p className={mobileSectionTitleClass}>Solutions</p>
+
                 {solutions.map(([name, path]) => (
                   <Link
                     key={path}
@@ -330,6 +340,7 @@ export default function Navbar() {
 
               <div>
                 <p className={mobileSectionTitleClass}>Resources</p>
+
                 {resources.map(([name, path]) => (
                   <Link
                     key={path}
@@ -397,6 +408,7 @@ export default function Navbar() {
                   Sign up
                 </Link>
               </div>
+
             </div>
           </div>
         )}
