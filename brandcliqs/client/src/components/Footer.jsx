@@ -14,7 +14,6 @@ const footerColumns = [
     title: 'Solutions',
     links: [
       { label: 'Marketers', to: '/solutions' },
-      { label: 'Individuals', to: '/solutions' },
       { label: 'Enterprise / Agencies', to: '/solutions' },
       { label: 'Students / Universities', to: '/solutions' },
     ],
