@@ -20,18 +20,6 @@ const audienceSolutions = [
     ],
   },
   {
-    title: 'Individuals',
-    subtitle: 'Launch lean, grow fast',
-    description:
-      'Get the tools, insights and support you need to build a strong marketing engine without unnecessary complexity.',
-    highlights: [
-      'Affordable stack',
-      'Dedicated manager',
-      'Growth insights',
-      'Vetted agency access',
-    ],
-  },
-  {
     title: 'Enterprise / Agencies',
     subtitle: 'Amplify your mission',
     description:
