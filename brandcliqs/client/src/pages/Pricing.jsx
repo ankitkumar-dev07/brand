@@ -426,7 +426,7 @@ export default function Pricing() {
               </div>
 
               <Link to="/support" className="btn btn-outline w-full transition-colors duration-300 group-hover:border-white group-hover:bg-white group-hover:text-[#6D28D9] mt-7">
-                Contact Us
+                Booked demo
               </Link>
             </PlanCard>
           </motion.div>
