@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const footerColumns = [
   {
-    title: 'Products',
+    title: 'Features',
     links: [
       { label: 'Tool Marketplace', to: '/products/tool-marketplace' },
       { label: 'Growth Analytics', to: '/products/growth-analytics' },
@@ -32,7 +32,7 @@ const footerColumns = [
     ],
   },
   {
-    title: 'Legal',
+    title: 'Legal/Privacy',
     links: [
       { label: 'Terms of Service', to: '/terms' },
       { label: 'Privacy Policy', to: '/privacy' },
