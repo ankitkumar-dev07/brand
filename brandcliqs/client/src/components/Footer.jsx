@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 
 const footerColumns = [
@@ -23,10 +22,13 @@ const footerColumns = [
   {
     title: 'Resources',
     links: [
+      { label: 'Case Studies', to: '/case-studies' },
+      { label: 'FAQ', to: '/faq' },
+      { label: 'Blog', to: '/blog' },
+      { label: 'LLM Info', to: '/llm-info' },
       { label: 'About Us', to: '/about' },
+      { label: 'Careers', to: '/careers' },
       { label: 'Support', to: '/support' },
-      { label: 'Jobs / Hiring', to: '/jobs' },
-      { label: 'Blog / Case Studies', to: '/blog' },
     ],
   },
   {
