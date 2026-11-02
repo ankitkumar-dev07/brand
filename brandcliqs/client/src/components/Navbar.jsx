@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 
 import brandLogo from '../assets/logo.jpg';
 
-const products = [
+const Features = [
   ['Tool Marketplace', '/products/tool-marketplace'],
   ['Growth Analytics', '/products/growth-analytics'],
   ['Agency Cliq', '/products/agency-cliq'],
