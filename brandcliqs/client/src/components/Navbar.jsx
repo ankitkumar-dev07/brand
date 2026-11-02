@@ -26,10 +26,11 @@ const solutions = [
 ];
 
 const resources = [
+  ['Case Studies', '/case-studies'],
+  ['FAQ', '/faq'],
+  ['Blog', '/blog'],
   ['About Us', '/about'],
-  ['Support', '/support'],
-  ['Jobs / Hiring', '/jobs'],
-  ['Blog / Case Studies', '/blog'],
+  ['Legal/Privacy', '/legal-privacy'],
 ];
 
 function Logo({ compact }) {
